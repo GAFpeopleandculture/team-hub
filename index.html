@@ -17,6 +17,7 @@
     .wrap { width:min(100% - 2.5rem,70rem); margin-inline:auto; }
     a { color:inherit; }
     :focus-visible { outline:3px solid #215aa5; outline-offset:4px; }
+    #app-content h1[tabindex="-1"]:focus { outline:none; }
     .skip { position:absolute; z-index:5; top:.5rem; left:.5rem; padding:.55rem .8rem; background:white; transform:translateY(-200%); }
     .skip:focus { transform:none; }
     .icon-bank { position:absolute; width:0; height:0; overflow:hidden; }
