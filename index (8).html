@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a4262c">
+  <title>Team Hub | Georgia Foods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #a4262c;
+      --red-deep: #5f1218;
+      --red-tint: #fbe3df;
+      --gold: #ffc72c;
+      --gold-soft: #ffe9a8;
+      --board: #25302b;
+      --page: #fff6d6;
+      --paper: #ffffff;
+      --ink: #26191a;
+      --muted: #5f4b48;
+      --line: #e6d3a3;
+      --slab: "Nunito", "Segoe UI", system-ui, sans-serif;
+      --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.55 var(--body); }
+    .wrap { width: min(100% - 2.5rem, 70rem); margin-inline: auto; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #1b4f9c; outline-offset: 4px; }
+    .skip { position: absolute; z-index: 5; top: .5rem; left: .5rem; padding: .55rem .8rem; background: white; transform: translateY(-200%); }
+    .skip:focus { transform: none; }
+    .icon-bank { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    /* Header, with a striped awning hanging off the bottom edge */
+    header { position: relative; z-index: 2; color: white; box-shadow: inset 0 -.4rem 0 var(--gold);
+      background: radial-gradient(circle at 84% 62%, #c3333a 0, var(--red) 46%) , var(--red); }
+    .awning { position: absolute; top: 100%; left: 0; right: 0; height: 1.7rem; pointer-events: none;
+      background: repeating-linear-gradient(90deg, var(--red) 0 2.5rem, #fff 2.5rem 5rem);
+      -webkit-mask: linear-gradient(#000 0 0) 0 0 / 100% .5rem no-repeat, radial-gradient(circle 1.25rem at 50% 0, #000 98%, transparent) 0 .5rem / 2.5rem 1.2rem repeat-x;
+      mask: linear-gradient(#000 0 0) 0 0 / 100% .5rem no-repeat, radial-gradient(circle 1.25rem at 50% 0, #000 98%, transparent) 0 .5rem / 2.5rem 1.2rem repeat-x;
+      transform-origin: top; animation: unroll .8s cubic-bezier(.2, .8, .3, 1) both; }
+    @keyframes unroll { from { transform: scaleY(0); } }
+    @media (prefers-reduced-motion: reduce) { .awning { animation: none; } }
+
+    .masthead { display: flex; align-items: center; gap: .7rem; padding-block: .9rem; border-bottom: 1px solid rgb(255 255 255 / 25%); }
+    .brand { font-weight: 800; font-size: 1.1rem; }
+    .brand-mark { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border-radius: .8rem; background: var(--gold); color: var(--red-deep); font: 900 .8rem var(--slab); }
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .34fr); align-items: center; gap: 1rem; padding-block: clamp(1.1rem, 3vw, 1.85rem) clamp(1.65rem, 4vw, 2.3rem); }
+    h1, h2, h3, .manager-title { margin: 0; line-height: 1.12; font-family: var(--slab); }
+    h1 { font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 900; letter-spacing: -.03em; }
+    .intro { margin: .9rem 0 0; max-width: 34rem; color: #ffeee6; font-size: clamp(1rem, 2vw, 1.12rem); }
+    .hero-art { display: block; width: 100%; max-width: 12.75rem; justify-self: end; }
+
+    main { padding-block: 2.55rem 3rem; }
+    .entry { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 1.25rem; align-items: stretch; }
+
+    /* Manager entry: a gold sign with a stitched inner edge */
+    .manager { position: relative; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .85rem;
+      background: var(--gold); border: 2px solid #d9a21c; border-radius: 1.25rem; padding: 1.25rem 1.5rem; text-decoration: none; }
+    .manager-copy { display: flex; align-items: center; gap: .9rem; }
+    .manager-title { display: block; font-size: clamp(1.3rem, 2.7vw, 1.8rem); font-weight: 900; color: var(--red-deep); }
+    .manager p { margin: .35rem 0 0; color: #3f2a1d; font-size: .93rem; }
+    .cta { display: inline-block; background: var(--red); color: white; padding: .6rem 1.1rem; border-radius: 999px; font-weight: 800; font-size: .9rem; }
+    .manager:hover .cta, .tool[href]:hover .action { text-decoration: underline; }
+
+    /* "On the Board": a chalkboard in a wood frame */
+    .notice { display: flex; flex-direction: column; justify-content: center; background: var(--board); color: #f2efe3; padding: 1rem 1.3rem;
+      border: .4rem solid #8c5b34; border-radius: 1.25rem; box-shadow: inset 0 0 1.2rem rgb(0 0 0 / 30%);
+      font-size: 1.02rem; line-height: 1.5; }
+    .notice .label { color: var(--gold); font-size: 1.15rem; font-weight: 800; margin-bottom: .2rem; border-bottom: 2px dotted rgb(242 239 227 / 40%); padding-bottom: .25rem; align-self: flex-start; }
+
+    .notice-title { color: white; font-size: 1.05rem; font-weight: 900; margin-top: .12rem; }
+
+    .workspace { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1.75rem; margin-top: 1.65rem; }
+    h2 { margin-bottom: 1rem; font-size: clamp(1.35rem, 2.6vw, 1.75rem); font-weight: 900; color: var(--red-deep); }
+    h2::after { content: ""; display: block; width: 2.6rem; height: .3rem; margin-top: .4rem; background: var(--red); border-radius: .2rem; }
+    .grid { display: grid; gap: .8rem; }
+
+    .tool, .soon { border: 1px solid var(--line); }
+    .tool { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: .9rem; background: var(--paper);
+      padding: 1rem 1.1rem 1rem 1.3rem; text-decoration: none; border-left: .45rem solid var(--red); border-radius: 1rem; }
+    .tool h3, .soon h3 { font-size: 1.12rem; font-weight: 800; }
+    .tool p, .soon p { margin: .28rem 0 .45rem; color: var(--muted); font-size: .92rem; }
+    .icon { flex: none; display: grid; place-items: center; width: 2.7rem; height: 2.7rem; border-radius: 50%; background: var(--red-tint); color: var(--red); }
+    .icon svg { width: 1.3rem; height: 1.3rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .manager .icon { background: var(--red-deep); color: var(--gold); }
+    .action, .pending { display: inline-block; font-size: .85rem; font-weight: 800; }
+    .action { color: var(--red); }
+    .pending { padding: .12rem .6rem; border-radius: 999px; background: var(--gold-soft); color: #5a3f08; }
+    .tool[href]:hover { border-color: var(--red); background: #fffdf5; }
+    .tool:not([href]) .action, .tool[href] .pending { display: none; }
+    .tool:not([href]) { background: #fffbea; }
+
+    /* Restaurant systems: gold band */
+    .tool.system { border-left-color: var(--gold); }
+    .tool.system .icon { background: var(--gold-soft); color: #6b4308; }
+
+    /* Forms: tickets with a punched notch on each side */
+    .tool.ticket { border-left: 1px solid var(--line); border-radius: 1rem; overflow: hidden; padding-inline: 1.5rem; border-color: #e0c06a; }
+    .tool.ticket::before, .tool.ticket::after { content: ""; position: absolute; top: 50%; width: 1.1rem; height: 1.1rem; margin-top: -.55rem; border-radius: 50%; background: var(--page); border: 1px solid #e0c06a; }
+    .tool.ticket::before { left: -.6rem; }
+    .tool.ticket::after { right: -.6rem; }
+
+    .soon { padding: .9rem 1.1rem; border-style: dashed; border-color: #cdb272; border-radius: 1rem; background: rgb(255 255 255 / 45%); }
+    .soon p { margin-bottom: 0; }
+
+    footer { background: var(--red-deep); color: white; }
+    footer::before { content: ""; display: block; height: .55rem; background: repeating-linear-gradient(90deg, var(--gold) 0 1.25rem, var(--red) 1.25rem 2.5rem); }
+    .contact { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding-block: 1.7rem; }
+    .contact h2 { margin-bottom: .6rem; color: white; }
+    .contact h2::after { background: var(--gold); }
+    .contact p { margin: .3rem 0; font-size: .95rem; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: .6rem; }
+    footer a { display: inline-block; padding: .6rem 1rem; background: var(--gold); color: var(--red-deep); font-weight: 800; text-decoration: none; border-radius: 999px; }
+    footer a:hover { text-decoration: underline; text-underline-offset: .2em; }
+    footer a:focus-visible { outline-color: white; }
+
+    @media (max-width: 48rem) {
+      .entry, .contact { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 36rem) {
+      .workspace { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: minmax(0, 1fr) 5.5rem; gap: .5rem; }
+    }
+    @media (max-width: 23rem) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-art { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg class="icon-bank" aria-hidden="true" focusable="false">
+    <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2"/></symbol>
+    <symbol id="icon-work" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="2"/><path d="M8 6V4h8v2M4 11h16m-9 3h2"/></symbol>
+    <symbol id="icon-people" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 19v-2a6 6 0 0 1 12 0v2z"/></symbol>
+    <symbol id="icon-schedule" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-12 4h2m4 0h2m-8 3h2"/></symbol>
+    <symbol id="icon-learn" viewBox="0 0 24 24"><path d="m3 9 9-5 9 5-9 5-9-5zm4 2v5a10 10 0 0 0 10 0v-5m4-2v6"/></symbol>
+    <symbol id="icon-feedback" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm2 5h10m-10 3h6"/></symbol>
+    <symbol id="icon-ticket" viewBox="0 0 24 24"><path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4V7zm10 2v2m0 2v2"/></symbol>
+  </svg>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header>
+    <div class="wrap masthead">
+      <span class="brand-mark" aria-hidden="true">GF</span>
+      <strong class="brand">Georgia Foods</strong>
+    </div>
+    <div class="wrap hero">
+      <div>
+        <h1>Team Hub</h1>
+        <p class="intro">Open the tools you use at work, find support, and get to your manager resources.</p>
+      </div>
+        <svg class="hero-art" viewBox="0 0 340 280" aria-hidden="true" focusable="false">
+          <defs>
+            <path id="ray" d="M170 17v25" />
+          </defs>
+          <g fill="none" stroke="#f6c46d" stroke-width="6" stroke-linecap="round">
+            <use href="#ray" transform="rotate(-58 170 140)" />
+            <use href="#ray" transform="rotate(-30 170 140)" />
+            <use href="#ray" />
+            <use href="#ray" transform="rotate(30 170 140)" />
+            <use href="#ray" transform="rotate(58 170 140)" />
+          </g>
+          <circle cx="170" cy="151" r="93" fill="#251813" />
+          <circle cx="166" cy="145" r="93" fill="#fff7e6" stroke="#251813" stroke-width="4" />
+          <circle cx="166" cy="145" r="78" fill="none" stroke="#f6c46d" stroke-width="2" stroke-dasharray="3 6" />
+          <g transform="rotate(-9 166 145)" stroke="#251813" stroke-width="4" stroke-linejoin="round">
+            <path d="M101 152q-4 27 24 33 39 9 81-1 25-7 24-29l-7-22-113-1z" fill="#d38339" />
+            <path d="M100 144q-2-24 17-31 4-13 21-11 13-11 30-6 14-8 28 3 18-1 24 11 16 9 12 25-4 18-30 24-40 9-76 3-22-3-26-18z" fill="#f5b955" />
+            <path d="M112 152q34 20 107-2" fill="none" stroke="#fff2cb" stroke-width="5" stroke-linecap="round" />
+            <path d="m132 124 9-4m26 11 11-4m16-13 8 1m-78 22 9 1" fill="none" stroke="#a05225" stroke-width="3" stroke-linecap="round" />
+          </g>
+          <path d="M65 184q0 16 16 16-16 0-16 16 0-16-16-16 16 0 16-16zm206-45q0 13 13 13-13 0-13 13 0-13-13-13 13 0 13-13z" fill="#f6c46d" />
+          <path d="M102 245q62 17 135-1" fill="none" stroke="#f6c46d" stroke-width="5" stroke-linecap="round" />
+        </svg>
+    </div>
+    <div class="awning" aria-hidden="true"></div>
+  </header>
+
+  <main class="wrap" id="main">
+    <div class="entry">
+      <a class="manager" href="https://georgiafoods.sharepoint.com/">
+        <div class="manager-copy">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-lock" /></svg></span>
+          <div>
+            <strong class="manager-title">Managers start here</strong>
+            <p>Sign in with your individual company account.</p>
+          </div>
+        </div>
+        <span class="cta">Open SharePoint <span aria-hidden="true">↗</span></span>
+      </a>
+
+      <aside class="notice" aria-label="Team update">
+        <strong class="label">On the Board</strong>
+        <!-- Replace this reminder when there is a new team update to share. -->
+        <strong class="notice-title">Save the Team Hub</strong>
+        <span>Add this page to the restaurant computer’s bookmarks bar so the next shift can open it in one click.</span>
+      </aside>
+    </div>
+
+    <div class="workspace">
+      <section aria-labelledby="tools">
+        <h2 id="tools">Your tools</h2>
+        <div class="grid">
+          <a class="tool" href="https://help.workstream.us/en/collections/15347637-workstream-us-app-worker-hub">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-work" /></svg></span>
+            <div>
+              <h3>Workstream</h3>
+              <p>Get help with Worker Hub, pay stubs, and tax documents.</p>
+              <span class="action">Open Worker Hub help <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+          <a class="tool" href="#help">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-people" /></svg></span>
+            <div>
+              <h3>People &amp; Culture</h3>
+              <p>Need help with pay, benefits, or a workplace question? We’re available weekdays from 9 AM to 4 PM ET.</p>
+              <span class="action">Who to contact <span aria-hidden="true">↓</span></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="restaurant-systems">
+        <h2 id="restaurant-systems">Restaurant systems</h2>
+        <div class="grid">
+          <!-- Add each sign-in URL as an href on its card to activate the link. -->
+          <a class="tool system" id="altametrics">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-schedule" /></svg></span>
+            <div>
+              <h3>Altametrics</h3>
+              <p>Access scheduling and labor tools for your restaurant.</p>
+              <span class="action">Open Altametrics <span aria-hidden="true">↗</span></span>
+              <span class="pending">Link coming soon</span>
+            </div>
+          </a>
+          <a class="tool system" id="bo-u">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-learn" /></svg></span>
+            <div>
+              <h3>Bo U</h3>
+              <p>Open Bojangles University for training and learning resources.</p>
+              <span class="action">Open Bo U <span aria-hidden="true">↗</span></span>
+              <span class="pending">Link coming soon</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="forms">
+        <h2 id="forms">Forms &amp; requests</h2>
+        <div class="grid">
+          <!-- Add each form URL as an href on its card to activate the link. -->
+          <a class="tool ticket" id="feedback-form">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-feedback" /></svg></span>
+            <div>
+              <h3>Feedback Form</h3>
+              <p>Tell us what’s working or suggest something we could improve.</p>
+              <span class="action">Open Feedback Form <span aria-hidden="true">↗</span></span>
+              <span class="pending">Link coming soon</span>
+            </div>
+          </a>
+          <a class="tool ticket" id="support-ticket">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#icon-ticket" /></svg></span>
+            <div>
+              <h3>Support Ticket</h3>
+              <p>Send a request when you need help resolving an issue.</p>
+              <span class="action">Open Support Ticket <span aria-hidden="true">↗</span></span>
+              <span class="pending">Link coming soon</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="coming-soon">
+        <h2 id="coming-soon">Coming soon</h2>
+        <div class="grid">
+          <article class="soon">
+            <h3>Training Guides</h3>
+            <p>Quick-reference guides for restaurant teams.</p>
+          </article>
+          <article class="soon">
+            <h3>HR &amp; Policies</h3>
+            <p>Handbook and People &amp; Culture resources.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="help">
+    <div class="wrap contact">
+      <div>
+        <h2>Who to contact</h2>
+        <p><strong>People &amp; Culture</strong> · Weekdays, 9 AM to 4 PM ET</p>
+        <p>When you reach out, include your name, restaurant location, and what you need help with.</p>
+      </div>
+      <p class="contact-links">
+        <a href="tel:+18004841622">Call 800-484-1622</a>
+        <a href="mailto:help@gaf-boj.com">Email help@gaf-boj.com</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
