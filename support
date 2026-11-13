@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#a4262c">
+  <title>Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+
+    :root { --red:#a4262c; --red-deep:#751b20; --gold:#ffc72c; --gold-soft:#fff3cb; --page:#f7f6f2; --paper:#fff; --ink:#292929; --muted:#62615f; --line:#deddd7; --body:"Roboto",Arial,sans-serif; --slab:var(--body); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font:1rem/1.55 var(--body); }
+    .wrap { width:min(100% - 2.5rem,70rem); margin-inline:auto; }
+    a { color:inherit; }
+    :focus-visible { outline:3px solid #215aa5; outline-offset:4px; }
+    #app-content h1[tabindex="-1"]:focus { outline:none; }
+    .skip { position:absolute; z-index:5; top:.5rem; left:.5rem; padding:.55rem .8rem; background:white; transform:translateY(-200%); }
+    .skip:focus { transform:none; }
+    .icon-bank { position:absolute; width:0; height:0; overflow:hidden; }
+    header { background:var(--red); color:white; border-bottom:3px solid var(--gold); }
+    .brandbar { display:flex; align-items:center; gap:1.4rem; padding-block:2rem; }
+    .hero-art { display:block; flex:none; width:5.5rem; height:auto; }
+    .company-name { display:block; font-size:.86rem; font-weight:500; letter-spacing:.025em; color:#fff0ea; margin-bottom:.35rem; }
+    h1 { margin:0; font-size:clamp(2.25rem,5vw,3.5rem); font-weight:800; letter-spacing:-.035em; line-height:1.12; }
+    h2,h3 { margin:0; line-height:1.2; color:var(--ink); }
+    h2 { font-size:1.5rem; font-weight:800; margin-bottom:1rem; }
+    h3 { font-size:1.1rem; font-weight:700; }
+    main { padding-block:2rem 2.6rem; }
+    .entry { display:block; }
+    .manager { display:flex; align-items:center; justify-content:space-between; gap:1.25rem; padding:1.35rem 1.5rem; background:white; border:1px solid var(--line); border-left:5px solid var(--gold); border-radius:.65rem; }
+    .manager-copy { display:flex; align-items:center; gap:1rem; }
+    .manager-title { margin:0; font-size:1.35rem; font-weight:800; }
+    .manager p { margin:.3rem 0 0; color:var(--muted); font-size:.9rem; }
+    .manager .account-note { font-size:.78rem; }
+    .manager-links { flex:none; }
+    .cta { display:inline-block; padding:.7rem 1rem; background:var(--red); color:white; border-radius:.35rem; font-size:.86rem; font-weight:700; text-decoration:none; }
+    .cta:hover { background:var(--red-deep); }
+    .workspace { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.8rem; margin-top:1.8rem; }
+    .tools-directory { grid-column:1 / -1; }
+    .grid { display:grid; gap:.8rem; }
+    .tools-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem 1.8rem; }
+    .tool { display:grid; grid-template-columns:auto minmax(0,1fr); gap:1rem; padding:1.15rem 1.25rem; min-height:8.5rem; border:1px solid var(--line); border-radius:.65rem; background:white; text-decoration:none; }
+    .tool > div { display:flex; flex-direction:column; }
+    .tool p { flex:1; margin:.4rem 0 .7rem; color:var(--muted); font-size:.92rem; line-height:1.5; }
+    .icon { display:grid; place-items:center; width:2.6rem; height:2.6rem; flex:none; background:var(--gold-soft); color:var(--red-deep); border-radius:.5rem; }
+    .icon svg { width:1.3rem; height:1.3rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .tool[href]:hover { border-color:var(--red); }
+    .tool[href]:hover .action { text-decoration:underline; text-underline-offset:.2em; }
+    .action { font-size:.84rem; font-weight:700; color:var(--red); margin-top:auto; }
+    .pending { display:inline-block; align-self:flex-start; padding:.13rem .55rem; border-radius:.3rem; background:#efeee9; color:#605d53; font-size:.78rem; font-weight:500; }
+    .tool:not([href]) .action,.tool[href] .pending { display:none; }
+    .tools-grid .people-card { grid-column:1 / -1; min-height:7rem; border-left:4px solid var(--red); }
+    .soon { padding:.85rem 1.1rem; min-height:5.4rem; border:1px dashed #ccc9c0; border-radius:.65rem; background:transparent; }
+    .soon h3 { font-size:1rem; }
+    .soon p { margin:.3rem 0 0; font-size:.87rem; color:var(--muted); }
+    footer { background:#292929; color:#f5f3ef; }
+    .footer-inner { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem; padding-block:1.15rem; font-size:.8rem; }
+    .site-nav { padding-top:1rem; font-size:.84rem; }
+    .site-nav a { color:white; text-underline-offset:.25em; }
+    .people-brandbar { padding-block:1.25rem 2rem; }
+    .people-layout { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(16rem,1fr); align-items:start; gap:2rem; }
+    .people-intro { margin:-.2rem 0 1.3rem; color:var(--muted); }
+    details { border-bottom:1px solid var(--line); }
+    details:first-of-type { border-top:1px solid var(--line); }
+    summary { position:relative; padding:1.1rem 2rem 1.1rem 0; color:var(--ink); font-size:1.02rem; font-weight:700; list-style:none; cursor:pointer; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:'+'; position:absolute; right:.3rem; top:.8rem; font-size:1.5rem; font-weight:400; }
+    details[open] summary::after { content:'−'; }
+    .faq-answer { padding:0 1.2rem 1.2rem 0; color:var(--muted); font-size:.95rem; }
+    .faq-answer p { margin:0 0 .75rem; }
+    .faq-answer p:last-child { margin-bottom:0; }
+    .faq-answer a { color:var(--red); font-weight:700; text-underline-offset:.2em; }
+    .contact-panel { padding:1.4rem; border:1px solid var(--line); border-radius:.65rem; background:white; }
+    .contact-panel p { color:var(--muted); font-size:.92rem; }
+    .contact-panel .text-link { display:block; background:var(--red); color:white; border-radius:.4rem; padding:.85rem 1rem; text-decoration:none; }
+    .text-link span,.text-link strong { display:block; }
+    .text-link span { font-size:.8rem; }
+    .text-link strong { font-size:clamp(1.3rem,2.7vw,1.65rem); white-space:nowrap; }
+    .email-link { display:inline-block; color:var(--red); margin-top:.8rem; font-weight:700; overflow-wrap:anywhere; }
+    .contact-panel .hours { padding-top:1rem; border-top:1px solid var(--line); font-size:.8rem; }
+    .call-link { color:var(--muted); font-size:.8rem; }
+    @media(max-width:48rem) { .manager { align-items:flex-start; flex-direction:column; } .people-layout { grid-template-columns:1fr; } .contact-panel { max-width:36rem; } }
+    @media(max-width:36rem) { .wrap { width:min(100% - 2rem,70rem); } .brandbar { gap:.8rem; padding-block:1.5rem; } .hero-art { width:3.8rem; } .company-name { font-size:.7rem; letter-spacing:0; } h1 { font-size:clamp(1.9rem,7.8vw,2.6rem); } .workspace,.tools-grid { grid-template-columns:1fr; } .manager { padding:1.1rem; } .manager-title { font-size:1.15rem; } .tool { min-height:8rem; padding:1rem; } .tools-grid .people-card { min-height:8rem; } }
+    /* Content is hidden in HTML before any JavaScript can run. */
+    #login-screen { min-height: 100vh; min-height: 100svh; padding: 1.5rem; display: grid; place-items: center; background: #f5f4f1; }
+    #login-screen[hidden] { display: none; }
+    #login-screen .login-card { width: min(100%, 26rem); padding: clamp(1.4rem, 5vw, 2.3rem); background: #fff; border: 1px solid #dedbd5; border-radius: .85rem; box-shadow: 0 .35rem 1.5rem #00000008; }
+    #login-screen h1 { font: 700 1.8rem/1.2 var(--body); letter-spacing: -.02em; color: #252525; margin: 0 0 .65rem; }
+    #login-screen p { color: #5c5c5c; font-size: .95rem; line-height: 1.6; margin: 0 0 1.3rem; }
+    #login-screen label { display: block; font-size: .9rem; font-weight: 700; color: #333; margin-bottom: .5rem; }
+    #store-passcode { width: 100%; min-height: 3rem; padding: .7rem .8rem; font: 1rem var(--body); border: 1px solid #aaa; border-radius: .4rem; background: white; color: #222; }
+    #unlock-button { width: 100%; min-height: 3rem; margin-top: .9rem; padding: .75rem; font: 700 1rem var(--body); color: white; background: #a4262c; border: 0; border-radius: .4rem; cursor: pointer; }
+    #unlock-button:disabled { opacity: .7; cursor: wait; }
+    #login-screen #login-status { color: #8a1820; min-height: 1.5em; margin: .8rem 0 0; font-size: .9rem; }
+    #login-screen .login-help { font-size: .8rem; margin: 1rem 0 0; color: #656565; }
+    #login-screen noscript p { color: #8a1820; margin-top: 1rem; }
+    [data-lock-device] { background: none; border: 1px solid #ffffff70; border-radius: .3rem; padding: .4rem .65rem; color: white; font: inherit; cursor: pointer; }
+
+    .ticket-wrap { max-width:52rem; }
+    .preview-note { padding:.85rem 1rem; border:1px solid #d8c89c; background:#fff8e6; border-radius:.5rem; color:#514b3a; font-size:.88rem; margin-bottom:1.5rem; }
+    .ticket-step { padding:1.4rem; background:white; border:1px solid var(--line); border-radius:.65rem; margin-bottom:1rem; }
+    .ticket-step h2 { font-size:1.25rem; }
+    .step-kicker { display:block; font-size:.72rem; color:var(--muted); letter-spacing:.06em; font-weight:700; margin-bottom:.4rem; }
+    .ticket-step p,.ticket-step li { font-size:.95rem; color:var(--muted); }
+    .ticket-step p { margin:.5rem 0; }
+    .ticket-step a { color:var(--red); font-weight:600; text-underline-offset:.2em; }
+    .topic-label,.field label { display:block; font-size:.9rem; font-weight:700; margin-bottom:.4rem; }
+    .field { margin-top:1rem; }
+    .field input,.field select,.field textarea,#topic { width:100%; border:1px solid #aaa9a3; border-radius:.35rem; background:white; color:var(--ink); padding:.7rem .8rem; font:1rem var(--body); min-height:2.9rem; }
+    .field textarea { resize:vertical; min-height:6rem; line-height:1.5; }
+    .field small { display:block; color:var(--muted); font-size:.8rem; margin-top:.3rem; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:0 1rem; }
+    .guide { border-left:4px solid var(--gold); padding-left:1rem; margin-bottom:1rem; }
+    .guide h3 { font-size:1.1rem; margin-bottom:.6rem; }
+    .guide p { color:var(--ink); }
+    .guide-links { display:flex; flex-wrap:wrap; gap:.7rem 1.2rem; margin-top:1rem; font-size:.88rem; }
+    .next-step { padding:.8rem 1rem; background:#f4f3ef; border-radius:.4rem; margin-top:1rem; }
+    .ticket-button { border:0; padding:.8rem 1.2rem; background:var(--red); color:white; border-radius:.35rem; font:700 1rem var(--body); cursor:pointer; }
+    .ticket-button:disabled { background:#e4e2dd; color:#666; cursor:not-allowed; }
+    .checkline { display:flex; align-items:flex-start; gap:.6rem; font-size:.92rem; margin:1rem 0; }
+    .checkline input { margin-top:.3rem; width:1.1rem; height:1.1rem; }
+    #form-error { color:#951f27; font-size:.9rem; }
+    .review-row { padding:.6rem 0; border-bottom:1px solid var(--line); white-space:pre-wrap; overflow-wrap:anywhere; }
+    .review-row strong { display:block; font-size:.8rem; color:var(--muted); margin-bottom:.25rem; }
+    #review-panel { margin-top:1rem; }
+    [hidden] { display:none !important; }
+    .secondary-button { background:transparent; color:var(--red); border:1px solid var(--red); margin-right:.5rem; }
+    @media(max-width:36rem) { .ticket-step { padding:1.1rem; } .field-row { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body data-portal-title="Employee Support | Georgia Foods">
+
+
+  <div id="login-screen">
+    <section class="login-card" aria-labelledby="login-heading">
+      <h1 id="login-heading">Employee Portal</h1>
+      <p>Enter your store passcode to continue.</p>
+      <form id="passcode-form">
+        <label for="store-passcode">Store passcode</label>
+        <input id="store-passcode" name="passcode" type="password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required aria-describedby="login-status login-help">
+        <button id="unlock-button" type="submit">Open portal</button>
+        <p id="login-status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="login-help" id="login-help">Ask your General Manager if you need your store’s passcode. This browser will remember your access unless its saved data is cleared or the passcode is retired.</p>
+      <noscript><p>JavaScript is required to open this portal. Enable it in your browser, then reload this page.</p></noscript>
+    </section>
+  </div>
+  <div id="app-content" style="display: none;" aria-hidden="true">
+  <a class="skip" href="#main">Skip to main content</a>
+  <header><nav class="wrap site-nav" aria-label="Site"><a href="https://gaf-boj.com/">← Bo-nnection</a></nav><div class="wrap brandbar people-brandbar"><div><span class="company-name">Georgia Foods &amp; A&amp;D of Greensborough</span><h1>Employee Support</h1></div></div></header>
+  <main class="wrap ticket-wrap" id="main"><div role="note" style="grid-column:1 / -1;border-left:5px solid #a4262c;padding:1rem;background:#fff3cb;color:#292929;"><strong>Workplace injury?</strong> Tell your GM or another available store manager immediately. Do not wait for a Support Ticket response.</div>
+    <section class="ticket-step"><span class="step-kicker">START HERE</span><h2>What do you need help with?</h2><p>Having trouble finding pay or personal information? Start with Worker Hub access.</p><label class="topic-label" for="topic">Choose your issue</label><select id="topic"><option value="">Select an issue…</option></select></section>
+    <section class="ticket-step" id="troubleshooting" hidden><span class="step-kicker">YOUR NEXT STEP</span><div class="guide" id="guide"></div><div id="topic-questions"></div><div class="next-step" id="next-step" role="status"></div></section>
+    <form class="ticket-step" id="ticket-form" hidden><span class="step-kicker">STILL NEED HELP?</span><h2>Tell us a little more.</h2><p>Website requests go to help@gaf-boj.com.</p><p>Need to send supporting screenshots or forms? Email them to <a href="mailto:help@gaf-boj.com">help@gaf-boj.com</a>. Include your name, restaurant location, and what the attachment relates to so we can match it to your ticket.</p>
+      <label class="checkline" id="anonymous-line" hidden><input id="anonymous" type="checkbox">Submit without my name or contact information</label>
+      <div id="identity-fields"><div class="field-row"><div class="field"><label for="firstName">First name</label><input id="firstName" autocomplete="given-name"></div><div class="field"><label for="lastName">Last name</label><input id="lastName" autocomplete="family-name"></div></div><div class="field-row"><div class="field"><label for="email">Reply email</label><input id="email" type="email" autocomplete="email"></div><div class="field"><label for="phone">Reply phone</label><input id="phone" type="tel" autocomplete="tel"></div></div><p><small>Please provide an email or phone we can reach you at.</small></p></div>
+      <div class="field"><label for="restaurant">Restaurant location</label><input id="restaurant" required placeholder="Store number or city; Office / Other if applicable"></div>
+      <div class="field"><label for="message">What would you like us to help with?</label><textarea id="message" required maxlength="6000"></textarea><small>Please don’t include bank account numbers, routing numbers, passwords, or Social Security numbers.</small></div>
+      <p id="form-error" role="alert"></p><button class="ticket-button" type="submit">Review request</button>
+    </form>
+    <section class="ticket-step" id="review-panel" hidden><h2>Review your request</h2><p>Check your answers, then send them to People &amp; Culture.</p><div id="review-content"></div><p><button class="ticket-button secondary-button" id="edit-request" type="button">Edit request</button><button class="ticket-button" id="send-submission" type="button">Send request</button></p><p id="send-status" role="status" aria-live="polite"></p></section>
+  </main><footer><div class="wrap footer-inner"><strong>Georgia Foods | A&amp;D of Greensborough</strong><button type="button" data-lock-device>Lock this device</button></div></footer>
+  </div>
+<script>
+
+(() => {
+  "use strict";
+  // Shared portal passcode hash. Update this array on BOTH HTML pages.
+  // Passcodes are case-sensitive; surrounding whitespace is ignored.
+  const VALID_HASHES = [
+    "955e49a21b4414aee3654247bb4e726317ecd8b37434e04504c21490148d807f"
+  ];
+  const allowed = new Set(VALID_HASHES.filter(value => /^[a-f0-9]{64}$/i.test(value)).map(value => value.toLowerCase()));
+  const STORAGE_KEY = "gaf_bonnection_store_hash_v1";
+  const REAL_TITLE = document.body.dataset.portalTitle;
+  const screen = document.getElementById("login-screen");
+  const app = document.getElementById("app-content");
+  const form = document.getElementById("passcode-form");
+  const input = document.getElementById("store-passcode");
+  const status = document.getElementById("login-status");
+  const button = document.getElementById("unlock-button");
+  let busy = false;
+  let sessionHash = null;
+  function readSaved() { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } }
+  function clearSaved() { try { localStorage.removeItem(STORAGE_KEY); } catch {} }
+  function unlock(hash) {
+    sessionHash = hash;
+    screen.hidden = true;
+    app.style.display = "block";
+    app.removeAttribute("aria-hidden");
+    document.title = REAL_TITLE;
+    input.value = "";
+    const heading = app.querySelector("h1");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
+  }
+  function lock() {
+    sessionHash = null;
+    clearSaved();
+    app.style.display = "none";
+    app.setAttribute("aria-hidden", "true");
+    screen.hidden = false;
+    document.title = "Employee Portal";
+    input.value = "";
+    status.textContent = "";
+    input.focus({ preventScroll: true });
+  }
+  const saved = readSaved();
+  if (saved && allowed.has(saved)) unlock(saved);
+  else if (saved) clearSaved();
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (busy) return;
+    status.textContent = "";
+    const passcode = input.value.trim();
+    if (!passcode) { status.textContent = "Enter your store passcode."; input.focus(); return; }
+    if (!allowed.size) { status.textContent = "Store passcodes have not been set up yet. Please check with your manager."; return; }
+    if (!globalThis.crypto?.subtle || !globalThis.TextEncoder) {
+      status.textContent = "Open this portal over HTTPS in an up-to-date browser, then try again.";
+      return;
+    }
+    busy = true; button.disabled = true; button.textContent = "Checking…";
+    try {
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passcode));
+      const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+      if (!allowed.has(hash)) {
+        status.textContent = "That passcode wasn’t recognized. Try again or ask your General Manager.";
+        input.value = ""; input.focus();
+        return;
+      }
+      try { localStorage.setItem(STORAGE_KEY, hash); } catch { /* Access still works if storage is unavailable. */ }
+      unlock(hash);
+    } catch {
+      status.textContent = "We couldn’t check that passcode. Please try again.";
+    } finally {
+      busy = false; button.disabled = false; button.textContent = "Open portal";
+    }
+  });
+  document.querySelectorAll("[data-lock-device]").forEach(control => control.addEventListener("click", lock));
+  window.addEventListener("storage", event => {
+    if (event.key === STORAGE_KEY || event.key === null) {
+      const hash = readSaved();
+      if (hash && allowed.has(hash)) unlock(hash);
+      else if (sessionHash) lock();
+    }
+  });
+})();
+
+</script>
+<script>
+
+(() => {
+ const TOPICS = {"worker-access": {"label": "I need help accessing Worker Hub", "group": "Worker Hub & employee information", "guide": ["Sign in to Worker Hub using the email address from your application.", "If you only see applications and not your employee information, submit an access ticket. Tell us what you see after signing in.", "If you no longer have access to your sign-in email or phone, choose the account-update option."], "fields": [{"key": "accessProblem", "label": "What happens when you try?", "type": "select", "choices": ["I’m only seeing applications", "I cannot sign in", "I see an error", "Something else"], "required": true}, {"key": "error", "label": "What message do you see?", "type": "textarea", "choices": null, "required": false}], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["Worker Hub sign-in help", "https://help.workstream.us/en/articles/12385920-use-the-workstream-us-app-worker-hub"]], "gate": "access", "extra": null}, "account-update": {"label": "I need to update the email or phone used to sign in", "group": "Worker Hub & employee information", "guide": ["If your old email or phone is keeping you from signing in, People & Culture can help update your account.", "For this request, we need your first name, last name, and date of birth to help verify your identity."], "fields": [{"key": "dob", "label": "Date of birth", "type": "date", "choices": null, "required": true}, {"key": "oldEmail", "label": "Previous email, if known", "type": "email", "choices": null, "required": false}, {"key": "oldPhone", "label": "Previous phone, if known", "type": "tel", "choices": null, "required": false}, {"key": "newEmail", "label": "Email you can access now", "type": "email", "choices": null, "required": true}, {"key": "newPhone", "label": "Current phone number", "type": "tel", "choices": null, "required": false}], "links": [], "gate": null, "extra": null}, "personal-info": {"label": "I need to change my address or other personal information", "group": "Worker Hub & employee information", "guide": ["You can update your address and phone in Worker Hub.", "Can’t sign in because your old email or phone is no longer available? Choose the account-update option above."], "fields": [{"key": "profileProblem", "label": "What are you unable to update?", "type": "textarea", "choices": null, "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/17602414-how-to-update-your-profile-info-in-the-workerhub-mobile-app"]], "gate": null, "extra": null}, "deposit": {"label": "I have a pay stub, but no direct deposit", "group": "Pay & payroll", "guide": ["Check the payment method on your pay stub. For Direct deposit, check your information in Worker Hub and contact your bank or credit union.", "If a deposit is returned, Payroll must wait for the return to be processed. Updating your banking information does not immediately resend a previously issued payment. Timing depends on the return and verification process.", "If you still need help, include the pay date and what you checked. Do not include banking numbers.", "Once your account is updated, allow 3–5 days for the update to process. Updating it does not immediately resend a prior payment."], "fields": [{"key": "method", "label": "What payment method does the stub show?", "type": "select", "choices": ["Direct deposit", "Manual Payment", "I’m not sure"], "required": true}, {"key": "bankContact", "label": "Have you checked your account details and contacted your financial institution?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "returnNotice", "label": "Have you received a returned-deposit email from Workstream?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "updatedAccount", "label": "Have you updated to a valid account?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "fiveDays", "label": "Have five business days passed since the update? (For context only; not a promised processing time)", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": false}, {"key": "payDate", "label": "Which pay date is affected?", "type": "date", "choices": null, "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/12399276-manage-your-payroll-in-the-workstream-us-app"]], "gate": "deposit", "extra": null}, "manual": {"label": "My payment method says Manual Payment", "group": "Pay & payroll", "guide": ["Manual Payment does not request or authorize a paper check. Paper checks require People & Culture approval.", "Update your banking information in Worker Hub by Monday at 9 AM. A change made after payroll processing has begun may not take effect until a later paycheck. People & Culture cannot enter banking information for you.", "If you need help, describe where you are getting stuck. Do not include banking numbers."], "fields": [], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/12399276-manage-your-payroll-in-the-workstream-us-app"]], "gate": "selfhelp", "extra": null}, "direct-deposit": {"label": "I want to update my direct deposit", "group": "Pay & payroll", "guide": ["Please add or update your direct deposit information through Worker Hub. These changes must be made through your account.", "Use the Workstream instructions below. If you can’t sign in, choose Worker Hub access help above.", "The change cutoff is Monday at 9 AM. A change made after payroll processing has begun may not take effect until a later paycheck."], "fields": [], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/12399276-manage-your-payroll-in-the-workstream-us-app"]], "gate": "selfhelp", "extra": null}, "missing-hours": {"label": "My paycheck is missing hours or punches", "group": "Pay & payroll", "guide": ["Ask your GM to review the dates and hours in question.", "If a correction is needed, your GM must review the records and initiate the Payroll Adjustment process. Submission does not mean the adjustment has completed approval or payroll processing.", "If you still need help, include the pay date, shifts, and manager contacted."], "fields": [{"key": "gmSpoken", "label": "Have you spoken with your GM?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "payDate", "label": "Which pay date is affected?", "type": "date", "choices": null, "required": true}, {"key": "shifts", "label": "Which dates, start times, and end times are involved?", "type": "textarea", "choices": null, "required": true}, {"key": "ppa", "label": "Has your GM submitted a PPA?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}], "links": [], "gate": "gm", "extra": null}, "no-stub": {"label": "I worked, but don’t see a pay stub", "group": "Pay & payroll", "guide": ["Please ask your GM to verify that your punches are complete and correct first.", "Used the time clock and your punches are correct? After reviewing with your GM, submit a ticket so People & Culture can research.", "Didn’t clock in, or punches are missing? Share the shift details with your GM. A PPA is needed before People & Culture can process that correction."], "fields": [{"key": "gmSpoken", "label": "Have you reviewed your punches with your GM?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "timeClock", "label": "Did you use the restaurant’s time clock?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "punchesCorrect", "label": "Are your punches complete and correct?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "payDate", "label": "Which expected payday are you asking about?", "type": "date", "choices": null, "required": true}, {"key": "shifts", "label": "Which dates and shifts did you work?", "type": "textarea", "choices": null, "required": true}, {"key": "ppa", "label": "If punches are missing, has your GM submitted a PPA?", "type": "select", "choices": ["Yes", "No", "I’m not sure", "Not applicable"], "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["Worker Hub sign-in help", "https://help.workstream.us/en/articles/12385920-use-the-workstream-us-app-worker-hub"]], "gate": "gm", "extra": null}, "pay-increase": {"label": "When will my pay increase take effect?", "group": "Pay & payroll", "guide": ["If your manager has told you a pay change was submitted, include what you were told about its approval and the date.", "Do not rely on a specific payment date until People & Culture confirms it."], "fields": [{"key": "increaseType", "label": "What is the increase related to?", "type": "select", "choices": ["Evaluation", "Job-class change", "Other"], "required": true}, {"key": "approved", "label": "Has the request received all required approvals?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "approvalDate", "label": "Approval date, if known", "type": "date", "choices": null, "required": false}], "links": [], "gate": null, "extra": null}, "payday": {"label": "When will I receive my first paycheck?", "group": "Pay & payroll", "guide": ["Payday is Friday for hours worked Monday through Sunday of the previous week. Your first check follows that schedule.", "No pay stub for the expected payday? Choose that option above."], "fields": [], "links": [["Open Worker Hub", "https://hub.workstream.us/"]], "gate": "selfhelp", "extra": null}, "pay-stubs": {"label": "Where can I find my pay stubs?", "group": "Pay & payroll", "guide": ["View and download pay stubs in Worker Hub under Pay statements. A PDF is also emailed to the address on file when you were hired.", "Can’t sign in? Start with Worker Hub access help above."], "fields": [], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/12399276-manage-your-payroll-in-the-workstream-us-app"]], "gate": "selfhelp", "extra": null}, "w2": {"label": "I need my W-2 or tax documents", "group": "Pay & payroll", "guide": ["Start in Worker Hub for W-2 and tax-document access.", "If you found your W-2 but believe a field is incorrect, select the correction option below and identify the field and tax year. Do not enter your Social Security number or full tax-form data."], "fields": [{"key": "taxYear", "label": "Tax year", "type": "text", "choices": null, "required": true}, {"key": "taxIssue", "label": "What do you need help with?", "type": "select", "choices": ["Finding my W-2", "A missing mailed W-2", "A correction", "Something else"], "required": true}, {"key": "documentRequest", "label": "What do you need help with?", "type": "select", "choices": ["Accessing a document", "Tax-document correction", "Other"], "required": true}, {"key": "fieldToReview", "label": "Which field needs review? Do not enter the sensitive value itself.", "type": "text", "choices": null, "required": false}], "links": [["Open Worker Hub", "https://hub.workstream.us/"], ["View Workstream instructions", "https://help.workstream.us/en/articles/12399276-manage-your-payroll-in-the-workstream-us-app"]], "gate": null, "extra": null}, "deduction": {"label": "I have a question about a deduction", "group": "Pay & payroll", "guide": ["Payroll can help explain a deduction. Please include the pay date, deduction name, and amount."], "fields": [{"key": "payDate", "label": "Pay date", "type": "date", "choices": null, "required": true}, {"key": "deductionName", "label": "Deduction name as shown on your stub", "type": "text", "choices": null, "required": true}, {"key": "deductionAmount", "label": "Deduction amount", "type": "text", "choices": null, "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"]], "gate": null, "extra": null}, "pto-pay": {"label": "My vacation or sick pay is missing", "group": "Pay & payroll", "guide": ["Check the pay period and pay statement against the time-off dates. Confirm with your GM when the request was approved.", "Approval after payroll has already been finalized may require a Payroll Adjustment rather than an immediate payment.", "If approved time is still missing, provide the request status, dates, hours, and expected pay date."], "fields": [{"key": "onTime", "label": "Were you told the request met the payroll deadline?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": false}, {"key": "approvalDate", "label": "Approval date, if known", "type": "date", "choices": null, "required": false}, {"key": "leaveDates", "label": "Which time-off dates are affected?", "type": "text", "choices": null, "required": true}, {"key": "payDate", "label": "Pay date", "type": "date", "choices": null, "required": true}, {"key": "ptoType", "label": "Type of paid time off", "type": "select", "choices": ["Vacation", "Sick pay", "Other"], "required": true}, {"key": "ptoHours", "label": "Hours of paid time off affected", "type": "text", "choices": null, "required": true}, {"key": "requestStatus", "label": "Current Worker Hub request status", "type": "text", "choices": null, "required": true}, {"key": "managerContacted", "label": "Manager contacted", "type": "text", "choices": null, "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"]], "gate": "pto", "extra": null}, "altametrics": {"label": "I can’t sign in to Altametrics Admin", "group": "Restaurant systems", "guide": ["Altametrics Admin access is for Shift Leaders, Assistant General Managers, and General Managers.", "Shift Leaders and AGMs: start in a browser with the email you used when you applied. On the password-reset page, request the code twice and use the newest emailed code.", "GMs: use your assigned GM email. If it doesn’t work, you don’t have one yet, or you still can’t sign in after the steps above, submit an access ticket."], "fields": [{"key": "role", "label": "What is your role?", "type": "select", "choices": ["Team Member", "Shift Leader", "Assistant General Manager", "General Manager"], "required": true}, {"key": "triedSteps", "label": "Have you tried the steps for your role?", "type": "select", "choices": ["Yes", "No", "I don’t have my GM email yet"], "required": true}, {"key": "error", "label": "What happens when you try?", "type": "textarea", "choices": null, "required": true}], "links": [["Open Altametrics", "https://aplogin.altametrics.com/ers/aplogin/BOJANGLES.html"], ["Reset password / verify account", "https://app122c.altametrics.com/BOJANGLES_U1/ers_webApp/BOJANGLES.woa/8060/wa/DirectAction/forgetPassword"]], "gate": "altametrics", "extra": null}, "benefits-enrollment": {"label": "I need help enrolling in benefits", "group": "Benefits & time off", "guide": ["Eligible employees receive an invitation from employeenavigator.com. Please check your email, including spam.", "Believe you should have received an invitation? You can submit a benefits ticket."], "fields": [{"key": "benefitProgram", "label": "Which benefit do you need help with?", "type": "select", "choices": ["Medical", "Dental", "Vision", "401(k)", "Benefit deduction", "Enrollment", "Insurance card", "Other"], "required": true}, {"key": "checkedEmail", "label": "Have you checked your inbox and spam folder?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}], "links": [], "gate": null, "extra": null}, "insurance-card": {"label": "I need an insurance card", "group": "Benefits & time off", "guide": ["Already enrolled? Request cards from your insurance provider.", "Not sure which provider you enrolled with? Call Southeast Insurance Group at 803-419-4730. This broker number is for employees who have already enrolled.", "Enrollment or other benefits questions can be sent to People & Culture."], "fields": [{"key": "benefitProgram", "label": "Which benefit do you need help with?", "type": "select", "choices": ["Medical", "Dental", "Vision", "401(k)", "Benefit deduction", "Enrollment", "Insurance card", "Other"], "required": true}, {"key": "enrolled", "label": "Have you already enrolled in benefits?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}], "links": [["Call Southeast Insurance Group", "tel:+18034194730"]], "gate": "insurance", "extra": null}, "vacation": {"label": "I have a vacation balance or eligibility question", "group": "Benefits & time off", "guide": ["Vacation is available after one year of continuous service. Before that anniversary, vacation time is not available yet.", "View your balance and request time off in Worker Hub. Completed one year and the balance looks missing or incorrect? Submit a ticket."], "fields": [{"key": "oneYear", "label": "Have you completed one year of continuous service?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "balanceIssue", "label": "What looks incorrect?", "type": "textarea", "choices": null, "required": true}], "links": [["Open Worker Hub", "https://hub.workstream.us/"]], "gate": "vacation", "extra": null}, "retirement": {"label": "I have a 401(k) eligibility question", "group": "Benefits & time off", "guide": ["Eligibility requires one year of continuous service and 1,200 hours. Eligible employees receive an invitation from 401GO.", "Please check your email, including spam. If you believe you qualify but haven’t received an invitation, submit a ticket."], "fields": [{"key": "benefitProgram", "label": "Which benefit do you need help with?", "type": "select", "choices": ["Medical", "Dental", "Vision", "401(k)", "Benefit deduction", "Enrollment", "Insurance card", "Other"], "required": true}, {"key": "eligibility", "label": "Have you completed one year and 1,200 hours?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "retirementIssue", "label": "What do you need help with?", "type": "textarea", "choices": null, "required": true}], "links": [], "gate": null, "extra": null}, "verification": {"label": "I need employment or income verification", "group": "Other employee support", "guide": ["Tell us what employment or wage information is requested, who requested it, and how it should be delivered.", "Email any supporting form to help@gaf-boj.com. Include your name, restaurant location, and what the form relates to. Do not include Social Security numbers or banking information.", "People & Culture can complete third-party forms or prepare a custom letter. There is no set turnaround time. Include any requested deadline; it is not guaranteed."], "fields": [{"key": "company", "label": "Company", "type": "select", "choices": ["Georgia Foods", "A&D of Greensborough", "I’m not sure"], "required": true}, {"key": "employmentStatus", "label": "Are you a current or former employee?", "type": "select", "choices": ["Current employee", "Former employee"], "required": true}, {"key": "verificationType", "label": "Information requested", "type": "select", "choices": ["Employment", "Wages", "Both", "Other"], "required": true}, {"key": "organization", "label": "Requesting organization", "type": "text", "choices": null, "required": true}, {"key": "organizationContact", "label": "Organization contact information", "type": "text", "choices": null, "required": true}, {"key": "requestedDeadline", "label": "Requested deadline, if any", "type": "date", "choices": null, "required": false}, {"key": "deliveryInstructions", "label": "Delivery instructions", "type": "textarea", "choices": null, "required": true}, {"key": "authorization", "label": "Employee authorization requested by the organization, if applicable. Describe it without sensitive data.", "type": "textarea", "choices": null, "required": false}], "links": [["Email Payroll", "mailto:pay@gaf-boj.com"]], "gate": null, "extra": null}, "workplace": {"label": "I want to report a workplace concern", "group": "Workplace support", "guide": ["You do not need GM permission to report a workplace concern. You may submit without your name or contact information.", "Describe what happened, when and where, and who was involved.", "Keep related texts, screenshots, emails, or other records available. You may be asked to provide them.", "People & Culture will review your concern and follow up as needed."], "fields": [{"key": "incidentWhen", "label": "When did this happen?", "type": "text", "choices": null, "required": false}, {"key": "involved", "label": "Who was involved?", "type": "textarea", "choices": null, "required": false}, {"key": "ongoing", "label": "Is the concern ongoing?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "witnesses", "label": "Are there witnesses or other details we should know?", "type": "textarea", "choices": null, "required": false}], "links": [], "gate": null, "extra": "anonymous"}, "injury": {"label": "I need help after an injury at work", "group": "Workplace support", "guide": ["Notify your GM right away. If you’ve reported it, or can’t reach your GM or another store manager who can help, contact People & Culture.", "For an emergency, seek immediate help. This form is not monitored for emergency response."], "fields": [{"key": "injuryDate", "label": "Date of injury", "type": "date", "choices": null, "required": true}, {"key": "managerContact", "label": "Who did you notify, and when? If nobody was available, tell us.", "type": "textarea", "choices": null, "required": true}], "links": [], "gate": null, "extra": null}, "leave": {"label": "I need leave or an accommodation", "group": "Workplace support", "guide": ["Tell us the assistance you need and when you need it to begin. Leave detailed diagnoses and medical documents out of the initial request.", "If documentation is needed, People & Culture will tell you what to provide and how to submit it. Do not give medical records to the restaurant unless People & Culture specifically directs you to do so.", "Contact People & Culture to get started. We can provide an FMLA form to return to us and explain the documentation needed for your request."], "fields": [{"key": "requestType", "label": "What assistance are you requesting?", "type": "select", "choices": ["Medical or family leave", "A workplace accommodation", "I’m not sure"], "required": true}, {"key": "neededDate", "label": "When do you need assistance to begin?", "type": "date", "choices": null, "required": false}], "links": [], "gate": null, "extra": null}, "other": {"label": "Something else", "group": "Other employee support", "guide": ["Tell us what you need help with and the best way to reach you."], "fields": [], "links": [], "gate": null, "extra": null}, "benefits-support": {"label": "I have another benefits question", "group": "Benefits & time off", "guide": ["Choose the benefit and explain whether you need help with eligibility, enrollment, deductions, or existing coverage."], "fields": [{"key": "benefitProgram", "label": "Which benefit do you need help with?", "type": "select", "choices": ["Medical", "Dental", "Vision", "401(k)", "Benefit deduction", "Enrollment", "Insurance card", "Other"], "required": true}, {"key": "benefitQuestion", "label": "What do you need help with?", "type": "textarea", "choices": null, "required": true}], "links": [], "gate": null, "extra": null}, "payroll-adjustment": {"label": "My payroll adjustment was submitted or approved", "group": "Pay & payroll", "guide": ["An adjustment corrects a verified payroll issue. It is not an immediate or same-day payment.", "Ask your manager whether it was submitted and whether it received the required approval.", "Do not rely on a specific payment date until People & Culture confirms it.", "Payroll Adjustments generally take 7–14 days from the date the adjustment is approved to process. This is an estimate, not a guaranteed payment date."], "fields": [{"key": "originalPayDate", "label": "Original pay date", "type": "date", "choices": null, "required": true}, {"key": "affectedDatesHours", "label": "Dates and hours affected", "type": "textarea", "choices": null, "required": true}, {"key": "correctionType", "label": "Correction type", "type": "select", "choices": ["Missing hours", "Incorrect rate", "Missing PTO", "Other"], "required": true}, {"key": "managerContacted", "label": "Manager contacted", "type": "text", "choices": null, "required": true}, {"key": "submittedDate", "label": "Date you were told it was submitted, if known", "type": "date", "choices": null, "required": false}, {"key": "approvalStatus", "label": "Were you told it was approved?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}], "links": [], "gate": null, "extra": null}, "tax-withholding": {"label": "I need help updating tax withholding or tax forms", "group": "Pay & payroll", "guide": ["Update your tax withholding through your own Worker Hub account. People & Culture cannot complete or change your tax elections for you.", "If you cannot access the tax section or receive an error, describe what happens. Do not include Social Security numbers or completed tax-form data."], "fields": [{"key": "company", "label": "Company", "type": "select", "choices": ["Georgia Foods", "A&D of Greensborough", "I’m not sure"], "required": true}, {"key": "canSignIn", "label": "Can you sign in to Worker Hub?", "type": "select", "choices": ["Yes", "No", "I’m not sure"], "required": true}, {"key": "taxUpdateType", "label": "Type of tax form or update — no completed form data", "type": "text", "choices": null, "required": true}, {"key": "attemptResult", "label": "What happens when you try?", "type": "textarea", "choices": null, "required": true}, {"key": "taxError", "label": "Error message, if any — remove sensitive information", "type": "textarea", "choices": null, "required": false}], "links": [], "gate": null, "extra": null}, "separation-records": {"label": "I need a separation notice or employment record", "group": "Other employee support", "guide": ["Include the company and restaurant where you worked and your approximate last day worked.", "If more information is needed, People & Culture will follow up.", "Employees from Georgia, South Carolina, North Carolina, and Virginia may submit a ticket for review."], "fields": [{"key": "company", "label": "Company", "type": "select", "choices": ["Georgia Foods", "A&D of Greensborough", "I’m not sure"], "required": true}, {"key": "lastWorked", "label": "Approximate last day worked (best estimate)", "type": "text", "choices": null, "required": true}, {"key": "documentNeeded", "label": "Document needed", "type": "text", "choices": null, "required": true}, {"key": "stateWorked", "label": "State where you worked", "type": "select", "choices": ["Georgia", "South Carolina", "North Carolina", "Virginia", "Other", "I’m not sure"], "required": true}], "links": [], "gate": null, "extra": null}, "holiday-pay": {"label": "I have a Holiday Pay question", "group": "Pay & payroll", "guide": ["Holiday Pay may appear separately from regular hours and may not look like additional hours. Eligibility and calculation rules may change by benefit year.", "Include the holiday worked, hours, pay date, and what appears on your pay statement.", "For Thanksgiving 2026, eligible Shift Leaders and Crew Members with over one year of continuous service receive 1.5 times their normal hourly rate for hours worked on November 26, 2026. The amount appears as Holiday Pay. Eligibility requires no overtime scheduled or worked in the November 23–29 payroll week. These rules are specific to Thanksgiving 2026."], "fields": [{"key": "holiday", "label": "Holiday", "type": "text", "choices": null, "required": true}, {"key": "holidayHours", "label": "Hours worked", "type": "text", "choices": null, "required": true}, {"key": "holidayPayDate", "label": "Pay date", "type": "date", "choices": null, "required": true}, {"key": "expectedPay", "label": "What did you expect?", "type": "textarea", "choices": null, "required": true}, {"key": "stubShows", "label": "What appears on your pay statement?", "type": "textarea", "choices": null, "required": true}], "links": [], "gate": null, "extra": null}};
+ const $ = id => document.getElementById(id);
+ const topicSelect=$('topic'), fields=$('topic-questions'), form=$('ticket-form');
+ let current=null;
+ const get=k=>document.getElementById('detail-'+k)?.value || '';
+ function guideText(text,href){const p=document.createElement('p');if(href){const a=document.createElement('a');a.textContent=text;a.href=href;if(href.startsWith('https:')){a.target='_blank';a.rel='noopener';}p.append(a);}else p.textContent=text;return p;}
+ const groups={};
+ for(const [key,t] of Object.entries(TOPICS)){if(!groups[t.group]){groups[t.group]=document.createElement('optgroup');groups[t.group].label=t.group;topicSelect.append(groups[t.group]);}const o=document.createElement('option');o.value=key;o.textContent=t.label;groups[t.group].append(o);}
+ function render(){
+  current=TOPICS[topicSelect.value] || null;
+  $('review-panel').hidden=true;form.reset();$('form-error').textContent='';
+  $('troubleshooting').hidden=!current;form.hidden=true;fields.replaceChildren();$('guide').replaceChildren();
+  if(!current)return;
+  const h=document.createElement('h3');h.textContent=current.label;$('guide').append(h);
+  current.guide.forEach(x=>$('guide').append(guideText(x)));
+  const links=document.createElement('div');links.className='guide-links';
+  current.links.forEach(([text,url])=>links.append(guideText(text,url)));$('guide').append(links);
+  current.fields.forEach(f=>{const wrap=document.createElement('div');wrap.className='field';const label=document.createElement('label');label.htmlFor='detail-'+f.key;label.textContent=f.label+(f.required?'':' (optional)');const input=document.createElement(f.type==='select'?'select':f.type==='textarea'?'textarea':'input');input.id=label.htmlFor;input.dataset.key=f.key;input.dataset.label=f.label;input.dataset.required=f.required?'true':'false';if(f.type==='select'){const start=document.createElement('option');start.value='';start.textContent='Choose…';input.append(start);f.choices.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;input.append(o);});}else if(f.type!=='textarea')input.type=f.type;if(f.type==='textarea')input.maxLength=6000;else if(f.type!=='select')input.maxLength=300;input.addEventListener('change',update);wrap.append(label,input);fields.append(wrap);});
+  $('anonymous-line').hidden=current.extra!=='anonymous';$('identity-fields').hidden=false;update();
+ }
+ function update(){
+  if(!current)return;
+  if(current.gate==='deposit' && get('method')==='Manual Payment'){
+   topicSelect.value='manual';render();$('troubleshooting').scrollIntoView({behavior:'smooth',block:'start'});return;
+  }
+  $('next-step').textContent='Review the guidance above. If you still need help, describe your request below.';
+  form.hidden=false;$('review-panel').hidden=true;
+ }
+ topicSelect.addEventListener('change',render);
+ $('anonymous').addEventListener('change',()=>{$('identity-fields').hidden=$('anonymous').checked;if($('anonymous').checked){['firstName','lastName','email','phone'].forEach(id=>$(id).value='');}});
+ form.addEventListener('submit',event=>{
+  event.preventDefault();$('form-error').textContent='';if(!current)return;
+  const anonymous=current.extra==='anonymous'&&$('anonymous').checked;
+  const fail=(msg,id)=>{$('form-error').textContent=msg;document.getElementById(id)?.focus();};
+  for(const input of fields.querySelectorAll('[data-required="true"]')){if(!input.value.trim()){fail('Please answer: '+input.dataset.label,input.id);return;}if(!input.checkValidity()){fail('Please check: '+input.dataset.label,input.id);return;}}
+  if(!anonymous){if(!$('firstName').value.trim()||!$('lastName').value.trim()){fail('Please enter your first and last name.','firstName');return;}if(!$('email').value.trim()&&!$('phone').value.trim()&&!get('newEmail')){fail('Please provide a reply email or phone number.','email');return;}}
+  const target=$('review-content');target.replaceChildren();
+  function row(label,value){if(!value)return;const d=document.createElement('div');d.className='review-row';const h=document.createElement('strong');h.textContent=label;const text=document.createElement('span');text.textContent=value;d.append(h,text);target.append(d);}
+  row('Topic',current.label);row('Restaurant',$('restaurant').value.trim());
+  row('Employee',anonymous?'Name and contact information not provided':$('firstName').value.trim()+' '+$('lastName').value.trim());
+  if(!anonymous){row('Reply email',$('email').value);row('Reply phone',$('phone').value);}
+  for(const input of fields.querySelectorAll('[data-key]'))row(input.dataset.label,input.value);
+  row('Request details',$('message').value.trim());
+  const details={};for(const input of fields.querySelectorAll('[data-key]'))if(input.value.trim())details[input.dataset.label]=input.value.trim();
+  reviewedPayload={category:'support',topic:current.label,restaurant:$('restaurant').value.trim(),firstName:anonymous?'':$('firstName').value.trim(),lastName:anonymous?'':$('lastName').value.trim(),email:anonymous?'':$('email').value.trim(),phone:anonymous?'':$('phone').value.trim(),anonymous,message:$('message').value.trim(),details};
+  $('review-panel').hidden=false;$('review-panel').scrollIntoView({behavior:'smooth',block:'start'});
+ });
+ $('edit-request').addEventListener('click',()=>{$('review-panel').hidden=true;form.scrollIntoView({behavior:'smooth',block:'start'});});
+
+ document.querySelectorAll('main input:not([type=checkbox])').forEach(input=>input.maxLength=300);
+ document.querySelectorAll('main textarea').forEach(input=>input.maxLength=6000);
+ const FLOW_URL = "https://default61fcb212c28b49fc906a4ff4d6ec98.fc.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/08/workflows/b00853b922c5426bb444754c0fa694bf/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6fuJt3scZFi1tR6xcfDN5ysu7sHASpAaDDj2TclAPiw";
+ let reviewedPayload=null, sending=false, sent=false;
+ async function deliver(payload) {
+  if(!FLOW_URL.startsWith('https://')) throw new Error('Submission is not configured yet. Please email help@gaf-boj.com.');
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),90000);
+  try {
+   const response=await fetch(FLOW_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+   if(!response.ok) throw new Error('The request was not confirmed. Please contact help@gaf-boj.com before trying again.');
+   const result=await response.json();
+   if(result.ok!==true) throw new Error('Delivery was not confirmed. Please contact help@gaf-boj.com before trying again.');
+  } finally { clearTimeout(timeout); }
+ }
+ function invalidateReview(){reviewedPayload=null;document.getElementById('review-panel').hidden=true;}
+ document.querySelector('main').addEventListener('input',invalidateReview);
+ document.querySelector('main').addEventListener('change',invalidateReview);
+ document.getElementById('send-submission').addEventListener('click',async()=>{
+  if(sending||sent||!reviewedPayload)return;
+  const payload=reviewedPayload;
+  const controls=Array.from(document.querySelectorAll('main input,main select,main textarea,main button'));
+  const previous=controls.map(control=>control.disabled);
+  sending=true;controls.forEach(control=>control.disabled=true);
+  const button=document.getElementById('send-submission'), status=document.getElementById('send-status');
+  button.textContent='Sending…';status.textContent='Sending your submission. Please keep this page open.';
+  try {
+   await deliver(payload);sent=true;
+   document.getElementById('review-content').replaceChildren();
+   document.querySelectorAll('main input,main textarea').forEach(input=>{if(input.type==='checkbox')input.checked=false;else input.value='';});
+   status.textContent='Sent to People & Culture. If you provided contact information, we can follow up with you. Reload this page if you need to send another submission.';
+   reviewedPayload = null;
+document.querySelector('main').innerHTML = `
+  <section class="ticket-step" id="sent-confirmation" tabindex="-1">
+    <h2>Submission sent</h2>
+    <p>People & Culture received your submission.</p>
+   <a href="/" style="display:inline-block; margin-top:1rem; padding:.75rem 1rem; background:#a4262c; color:#ffffff; border-radius:.35rem; font-weight:700; text-decoration:none;">Back to Bo-nnection</a>
+  </section>
+`;
+document.getElementById('sent-confirmation').focus({preventScroll:true});
+window.scrollTo(0, 0);
+  } catch(error) {
+   status.textContent=error.message.startsWith('Submission is not configured')?error.message:'We couldn’t confirm delivery. Your answers are still here. Check with help@gaf-boj.com before sending again to avoid a duplicate.';
+   button.textContent='Send again';
+  } finally {
+   sending=false;if(!sent)controls.forEach((control,index)=>control.disabled=previous[index]);
+  }
+ });
+})();
+
+</script>
+</body>
+</html>
