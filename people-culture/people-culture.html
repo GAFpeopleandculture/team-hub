@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex, nofollow">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#a4262c">
+  <title>Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+
+    :root { --red:#a4262c; --red-deep:#751b20; --gold:#ffc72c; --gold-soft:#fff3cb; --page:#f7f6f2; --paper:#fff; --ink:#292929; --muted:#62615f; --line:#deddd7; --body:"Roboto",Arial,sans-serif; --slab:var(--body); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--page); color:var(--ink); font:1rem/1.55 var(--body); }
+    .wrap { width:min(100% - 2.5rem,70rem); margin-inline:auto; }
+    a { color:inherit; }
+    :focus-visible { outline:3px solid #215aa5; outline-offset:4px; }
+    #app-content h1[tabindex="-1"]:focus { outline:none; }
+    .skip { position:absolute; z-index:5; top:.5rem; left:.5rem; padding:.55rem .8rem; background:white; transform:translateY(-200%); }
+    .skip:focus { transform:none; }
+    .icon-bank { position:absolute; width:0; height:0; overflow:hidden; }
+    header { background:var(--red); color:white; border-bottom:3px solid var(--gold); }
+    .brandbar { display:flex; align-items:center; gap:1.4rem; padding-block:2rem; }
+    .hero-art { display:block; flex:none; width:5.5rem; height:auto; }
+    .company-name { display:block; font-size:.86rem; font-weight:500; letter-spacing:.025em; color:#fff0ea; margin-bottom:.35rem; }
+    h1 { margin:0; font-size:clamp(2.25rem,5vw,3.5rem); font-weight:800; letter-spacing:-.035em; line-height:1.12; }
+    h2,h3 { margin:0; line-height:1.2; color:var(--ink); }
+    h2 { font-size:1.5rem; font-weight:800; margin-bottom:1rem; }
+    h3 { font-size:1.1rem; font-weight:700; }
+    main { padding-block:2rem 2.6rem; }
+    .entry { display:block; }
+    .manager { display:flex; align-items:center; justify-content:space-between; gap:1.25rem; padding:1.35rem 1.5rem; background:white; border:1px solid var(--line); border-left:5px solid var(--gold); border-radius:.65rem; }
+    .manager-copy { display:flex; align-items:center; gap:1rem; }
+    .manager-title { margin:0; font-size:1.35rem; font-weight:800; }
+    .manager p { margin:.3rem 0 0; color:var(--muted); font-size:.9rem; }
+    .manager .account-note { font-size:.78rem; }
+    .manager-links { flex:none; }
+    .cta { display:inline-block; padding:.7rem 1rem; background:var(--red); color:white; border-radius:.35rem; font-size:.86rem; font-weight:700; text-decoration:none; }
+    .cta:hover { background:var(--red-deep); }
+    .workspace { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.8rem; margin-top:1.8rem; }
+    .tools-directory { grid-column:1 / -1; }
+    .grid { display:grid; gap:.8rem; }
+    .tools-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.8rem 1.8rem; }
+    .tool { display:grid; grid-template-columns:auto minmax(0,1fr); gap:1rem; padding:1.15rem 1.25rem; min-height:8.5rem; border:1px solid var(--line); border-radius:.65rem; background:white; text-decoration:none; }
+    .tool > div { display:flex; flex-direction:column; }
+    .tool p { flex:1; margin:.4rem 0 .7rem; color:var(--muted); font-size:.92rem; line-height:1.5; }
+    .icon { display:grid; place-items:center; width:2.6rem; height:2.6rem; flex:none; background:var(--gold-soft); color:var(--red-deep); border-radius:.5rem; }
+    .icon svg { width:1.3rem; height:1.3rem; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .tool[href]:hover { border-color:var(--red); }
+    .tool[href]:hover .action { text-decoration:underline; text-underline-offset:.2em; }
+    .action { font-size:.84rem; font-weight:700; color:var(--red); margin-top:auto; }
+    .pending { display:inline-block; align-self:flex-start; padding:.13rem .55rem; border-radius:.3rem; background:#efeee9; color:#605d53; font-size:.78rem; font-weight:500; }
+    .tool:not([href]) .action,.tool[href] .pending { display:none; }
+    .tools-grid .people-card { grid-column:1 / -1; min-height:7rem; border-left:4px solid var(--red); }
+    .soon { padding:.85rem 1.1rem; min-height:5.4rem; border:1px dashed #ccc9c0; border-radius:.65rem; background:transparent; }
+    .soon h3 { font-size:1rem; }
+    .soon p { margin:.3rem 0 0; font-size:.87rem; color:var(--muted); }
+    footer { background:#292929; color:#f5f3ef; }
+    .footer-inner { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.8rem; padding-block:1.15rem; font-size:.8rem; }
+    .site-nav { padding-top:1rem; font-size:.84rem; }
+    .site-nav a { color:white; text-underline-offset:.25em; }
+    .people-brandbar { padding-block:1.25rem 2rem; }
+    .people-layout { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(16rem,1fr); align-items:start; gap:2rem; }
+    .people-intro { margin:-.2rem 0 1.3rem; color:var(--muted); }
+    details { border-bottom:1px solid var(--line); }
+    details:first-of-type { border-top:1px solid var(--line); }
+    summary { position:relative; padding:1.1rem 2rem 1.1rem 0; color:var(--ink); font-size:1.02rem; font-weight:700; list-style:none; cursor:pointer; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:'+'; position:absolute; right:.3rem; top:.8rem; font-size:1.5rem; font-weight:400; }
+    details[open] summary::after { content:'−'; }
+    .faq-answer { padding:0 1.2rem 1.2rem 0; color:var(--muted); font-size:.95rem; }
+    .faq-answer p { margin:0 0 .75rem; }
+    .faq-answer p:last-child { margin-bottom:0; }
+    .faq-answer a { color:var(--red); font-weight:700; text-underline-offset:.2em; }
+    .contact-panel { padding:1.4rem; border:1px solid var(--line); border-radius:.65rem; background:white; }
+    .contact-panel p { color:var(--muted); font-size:.92rem; }
+    .contact-panel .text-link { display:block; background:var(--red); color:white; border-radius:.4rem; padding:.85rem 1rem; text-decoration:none; }
+    .text-link span,.text-link strong { display:block; }
+    .text-link span { font-size:.8rem; }
+    .text-link strong { font-size:clamp(1.3rem,2.7vw,1.65rem); white-space:nowrap; }
+    .email-link { display:inline-block; color:var(--red); margin-top:.8rem; font-weight:700; overflow-wrap:anywhere; }
+    .contact-panel .hours { padding-top:1rem; border-top:1px solid var(--line); font-size:.8rem; }
+    .call-link { color:var(--muted); font-size:.8rem; }
+    @media(max-width:48rem) { .manager { align-items:flex-start; flex-direction:column; } .people-layout { grid-template-columns:1fr; } .contact-panel { max-width:36rem; } }
+    @media(max-width:36rem) { .wrap { width:min(100% - 2rem,70rem); } .brandbar { gap:.8rem; padding-block:1.5rem; } .hero-art { width:3.8rem; } .company-name { font-size:.7rem; letter-spacing:0; } h1 { font-size:clamp(1.9rem,7.8vw,2.6rem); } .workspace,.tools-grid { grid-template-columns:1fr; } .manager { padding:1.1rem; } .manager-title { font-size:1.15rem; } .tool { min-height:8rem; padding:1rem; } .tools-grid .people-card { min-height:8rem; } }
+    /* Content is hidden in HTML before any JavaScript can run. */
+    #login-screen { min-height: 100vh; min-height: 100svh; padding: 1.5rem; display: grid; place-items: center; background: #f5f4f1; }
+    #login-screen[hidden] { display: none; }
+    #login-screen .login-card { width: min(100%, 26rem); padding: clamp(1.4rem, 5vw, 2.3rem); background: #fff; border: 1px solid #dedbd5; border-radius: .85rem; box-shadow: 0 .35rem 1.5rem #00000008; }
+    #login-screen h1 { font: 700 1.8rem/1.2 var(--body); letter-spacing: -.02em; color: #252525; margin: 0 0 .65rem; }
+    #login-screen p { color: #5c5c5c; font-size: .95rem; line-height: 1.6; margin: 0 0 1.3rem; }
+    #login-screen label { display: block; font-size: .9rem; font-weight: 700; color: #333; margin-bottom: .5rem; }
+    #store-passcode { width: 100%; min-height: 3rem; padding: .7rem .8rem; font: 1rem var(--body); border: 1px solid #aaa; border-radius: .4rem; background: white; color: #222; }
+    #unlock-button { width: 100%; min-height: 3rem; margin-top: .9rem; padding: .75rem; font: 700 1rem var(--body); color: white; background: #a4262c; border: 0; border-radius: .4rem; cursor: pointer; }
+    #unlock-button:disabled { opacity: .7; cursor: wait; }
+    #login-screen #login-status { color: #8a1820; min-height: 1.5em; margin: .8rem 0 0; font-size: .9rem; }
+    #login-screen .login-help { font-size: .8rem; margin: 1rem 0 0; color: #656565; }
+    #login-screen noscript p { color: #8a1820; margin-top: 1rem; }
+    [data-lock-device] { background: none; border: 1px solid #ffffff70; border-radius: .3rem; padding: .4rem .65rem; color: white; font: inherit; cursor: pointer; }
+  </style>
+</head>
+<body data-portal-title="People &amp; Culture | Georgia Foods">
+
+  <div id="login-screen">
+    <section class="login-card" aria-labelledby="login-heading">
+      <h1 id="login-heading">Employee Portal</h1>
+      <p>Enter your store passcode to continue.</p>
+      <form id="passcode-form">
+        <label for="store-passcode">Store passcode</label>
+        <input id="store-passcode" name="passcode" type="password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required aria-describedby="login-status login-help">
+        <button id="unlock-button" type="submit">Open portal</button>
+        <p id="login-status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="login-help" id="login-help">Ask your General Manager if you need your store’s passcode. This browser will remember your access unless its saved data is cleared or the passcode is retired.</p>
+      <noscript><p>JavaScript is required to open this portal. Enable it in your browser, then reload this page.</p></noscript>
+    </section>
+  </div>
+  <div id="app-content" style="display: none;" aria-hidden="true">
+  <a class="skip" href="#main">Skip to main content</a>
+  <header><nav class="wrap site-nav" aria-label="Site"><a href="https://gaf-boj.com/">← Bo-nnection</a></nav><div class="wrap brandbar people-brandbar"><div><span class="company-name">Georgia Foods &amp; A&amp;D of Greensborough</span><h1>People &amp; Culture</h1></div></div></header>
+  <main class="wrap people-layout" id="main"><div role="note" style="grid-column:1 / -1;border-left:5px solid #a4262c;padding:1rem;background:#fff3cb;color:#292929;"><strong>Workplace injury?</strong> Tell your GM or another available store manager immediately. Do not wait for a Support Ticket response.</div>
+  <section aria-labelledby="faq-heading">
+    <h2 id="faq-heading">Find an answer. Get the right help.</h2>
+    <p class="people-intro">
+      Check the answers below. If you still need help, submit a
+      Support Ticket so People &amp; Culture has the details
+      needed to review your request.
+    </p>
+
+    <details>
+      <summary>Where do I find my pay stubs?</summary>
+      <div class="faq-answer">
+        <p>Sign in to <a href="https://hub.workstream.us/">Workstream Worker Hub</a> to view your pay statements.</p>
+        <p>If you cannot sign in or find the statement you need, <a href="/support/">submit a Support Ticket</a>. Choose the Worker Hub access issue or <strong>Something else</strong>, and include the pay date.</p>
+      </div>
+    </details>
+
+    <details><summary>I have a pay stub, but no direct deposit. What should I do?</summary><div class="faq-answer"><p>Check the payment method on your pay stub. For Manual Payment, see the next answer. For Direct deposit, check your information in <a href="https://hub.workstream.us/">Worker Hub</a> and contact your bank or credit union.</p><p>If a deposit is returned, Payroll must wait for the return to be processed. Updating your banking information does not immediately resend a previously issued payment. Timing depends on the return and verification process. Once your account is updated, allow 3–5 days for that update to process.</p><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> if you still need help. Include the pay date and what you have checked. Do not include banking numbers.</p></div></details>
+
+    <details><summary>My stub says Manual Payment. Will I receive a paper check?</summary><div class="faq-answer"><p>Manual Payment does not request or authorize a paper check. Paper checks require People &amp; Culture approval.</p><p>Update your banking information in <a href="https://hub.workstream.us/">Worker Hub</a> by <strong>Monday at 9 AM</strong>. A change made after payroll processing has begun may not take effect until a later paycheck. People &amp; Culture cannot enter banking information for you.</p><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> and choose <strong>My payment method says Manual Payment</strong> if you need help.</p></div></details>
+
+    <details>
+      <summary>How do I change my direct deposit information?</summary>
+      <div class="faq-answer">
+        <p>Add or update your banking information through your own <a href="https://hub.workstream.us/">Worker Hub</a> account. Review the information carefully before saving.</p>
+        <p>If you get stuck, <a href="/support/">submit a Support Ticket</a> and choose <strong>I want to update my direct deposit</strong>. If you cannot sign in, choose the Worker Hub access issue instead.</p>
+        <p>Do not include bank account numbers, routing numbers, passwords, or Social Security numbers in your ticket.</p>
+      </div>
+    </details>
+
+    <details><summary>I am missing hours from my paycheck. Where do I start?</summary><div class="faq-answer"><p>Start with your GM. Provide the dates and hours you believe are missing.</p><p>If a correction is needed, your GM must review the records and initiate the Payroll Adjustment process. Submission does not mean the adjustment has completed approval or payroll processing.</p><p>If you still need help, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for missing hours. Include the pay date, dates/hours affected, and manager contacted.</p></div></details>
+
+    <details><summary>Where do I find my W-2 or other tax documents?</summary><div class="faq-answer"><p>Start in <a href="https://hub.workstream.us/">Worker Hub</a>. If you cannot find your W-2 or other tax document, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> about tax documents and include the tax year.</p><p>If you found your W-2 but believe information on it is incorrect, submit a Support Ticket for a tax-document correction instead of an access issue. Tell us the tax year and which field you believe needs review. Do not enter your Social Security number in the ticket.</p></div></details>
+
+    <details><summary>I cannot sign in to Worker Hub. What should I do?</summary><div class="faq-answer"><p>Use the email address from your application to sign in to <a href="https://hub.workstream.us/">Worker Hub</a>.</p><p>If you only see applications and not your employee/Worker Hub information, <a href="https://gaf-boj.com/support/">submit a Worker Hub access ticket</a>. Tell us what you see after signing in. Include an error message if there is one, but never your password.</p></div></details>
+
+    <details>
+      <summary>I no longer have access to the email or phone on my account. Can you help?</summary>
+      <div class="faq-answer">
+        <p><a href="/support/">Submit a Support Ticket</a> and choose <strong>I need to update the email or phone used to sign in</strong>. The form will ask for the information we need to verify your identity and an email address you can access now.</p>
+        <p>Please do not include your password or Social Security number.</p>
+      </div>
+    </details>
+
+    <details><summary>Who handles schedule changes and time-off requests?</summary><div class="faq-answer"><p>Your GM handles scheduling and approval of time away from work. Submitting a Support Ticket does not approve time off.</p><p>People &amp; Culture can help when the question is about your PTO balance, eligibility, an approved request missing from your pay, or another PTO record/payroll issue.</p><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> with the relevant dates and what needs reviewing.</p></div></details>
+
+    <details><summary>I have a benefits or 401(k) question. How do I get help?</summary><div class="faq-answer"><p><a href="https://gaf-boj.com/support/">Submit a Benefits Support Ticket</a>. Choose Medical, Dental, Vision, 401(k), Benefit deduction, Enrollment, Insurance card, or Other in the benefit question.</p><p>Tell us whether you need help with eligibility, enrollment, deductions, or existing coverage. For insurance cards, the form will provide guidance based on whether you are enrolled.</p></div></details>
+
+    <details><summary>How do I report a workplace concern?</summary><div class="faq-answer"><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> and choose <strong>I want to report a workplace concern</strong>. You do not need your GM’s permission. Tell us what happened, when and where, and who was involved.</p><p>You may submit without your name or contact information. A way to reach you helps us ask follow-up questions.</p><p>If you have texts, screenshots, emails, or other records related to your concern, keep them available. You may be asked to provide them.</p><p>People &amp; Culture will review your concern and follow up as needed.</p></div></details>
+
+    <details><summary>I need leave or an accommodation. Where do I start?</summary><div class="faq-answer"><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> and choose <strong>I need leave or an accommodation</strong>. Tell us what assistance you need and when it needs to begin. Leave detailed diagnoses and medical documents out of the initial ticket.</p><p>If documentation is needed, People &amp; Culture will tell you what to provide and how to submit it. Do not give medical records to the restaurant unless People &amp; Culture specifically directs you to do so.</p><p>Contact People &amp; Culture to get started. We can provide an FMLA form for you to return to us and explain what documentation is needed for your request.</p></div></details>
+
+    <details><summary>What happens after I submit a ticket?</summary><div class="faq-answer"><p>A confirmation screen appears after your submission is sent. If you provided contact information, People &amp; Culture can follow up.</p><p>People &amp; Culture is available <strong>Monday–Friday, 9 AM–4 PM Eastern</strong>. We strive to respond within <strong>12–24 business hours</strong>.</p></div></details>
+
+    <details>
+      <summary>My question is not listed. Can I still submit a ticket?</summary>
+      <div class="faq-answer">
+        <p>Yes. <a href="/support/">Open a Support Ticket</a> and choose <strong>Something else</strong>. Include your restaurant location, what you need help with, and the best way to reach you.</p>
+      </div>
+    </details>
+  <details><summary>My payroll adjustment was submitted or approved. When will I get paid?</summary><div class="faq-answer"><p>A Payroll Adjustment corrects a verified payroll issue, such as missing hours, an incorrect pay rate, or missed approved PTO. An adjustment is not an immediate or same-day payment.</p><p>If your manager says an adjustment has already been submitted, ask whether it has also received the required approval. If you still need help, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for a payroll adjustment. Include the pay date, dates/hours being corrected, when it was submitted, and whether you were told it was approved.</p><p>Do not rely on a specific payment date until People &amp; Culture confirms it.</p><p>Payroll Adjustments generally take <strong>7–14 days from the date the adjustment is approved</strong> to process. This is a processing estimate, not a guaranteed payment date.</p></div></details>
+<details><summary>My vacation, sick pay, or other paid time off was approved, but it wasn’t on my paycheck. What should I do?</summary><div class="faq-answer"><p>First check the pay period and pay statement to make sure you are reviewing the paycheck that corresponds to the time-off dates. Then confirm with your GM when the request was approved.</p><p>Approval after payroll has already been finalized may require a Payroll Adjustment rather than an immediate payment.</p><p>If the approved time is still missing, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for missing time-off pay.</p></div></details>
+<details><summary>How do I update my tax withholding or tax forms?</summary><div class="faq-answer"><p>Employees can update their own tax withholding information through <a href="https://hub.workstream.us/">Workstream Worker Hub</a>. People &amp; Culture cannot complete or change an employee’s tax elections for them.</p><p>If you cannot access the tax section or receive an error, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for tax withholding help. Do not include completed tax-form data or your Social Security number.</p></div></details>
+<details><summary>I need proof of employment or wages. How do I request it?</summary><div class="faq-answer"><p>If an apartment complex, lender, government agency, benefits program, or another organization needs employment or wage information, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for employment verification.</p><p>Tell us what information is being requested. If the request will go directly to another organization, include its contact information and any authorization or instructions you received.</p><p>Need to send supporting screenshots or forms? Email them to <a href="mailto:help@gaf-boj.com">help@gaf-boj.com</a>. Include your name, restaurant location, and what the attachment relates to so we can match it to your ticket.</p><p>People &amp; Culture can complete third-party verification forms or prepare a custom letter. There is no set turnaround time. Include any requested deadline; submission does not guarantee delivery by that date.</p></div></details>
+<details><summary>I’m no longer employed. How do I request my separation notice?</summary><div class="faq-answer"><p><a href="https://gaf-boj.com/support/">Submit a Support Ticket</a> and choose the separation/employment-records option. Include the company and restaurant where you worked and your approximate last day worked.</p><p>If People &amp; Culture needs additional information to prepare the document, we will follow up.</p><p>Employees who worked in Georgia, South Carolina, North Carolina, or Virginia may submit a ticket. People &amp; Culture will review the request and follow up if more information is needed.</p></div></details>
+<details><summary>How does Holiday Pay appear on my pay stub?</summary><div class="faq-answer"><p>Holiday Pay may appear separately from regular hours and may not look like additional hours on the pay statement. Eligibility and calculation rules may change by benefit year.</p><p>For <strong>Thanksgiving 2026</strong>, eligible Shift Leaders and Crew Members with <strong>over one year of continuous service</strong> receive 1.5 times their normal hourly rate for hours worked on November 26, 2026. The amount appears as <strong>Holiday Pay</strong> on the pay statement. This benefit applies only when no overtime is scheduled or worked during the November 23–29, 2026 payroll week. These are the current 2026 Thanksgiving rules; do not assume they apply to another holiday or benefit year.</p><p>If you believe Holiday Pay is missing, <a href="https://gaf-boj.com/support/">submit a Support Ticket</a> for Holiday Pay. Include the holiday worked, hours worked, pay date, and what appears on your pay statement.</p></div></details>
+<details><summary>Where can I see information about the benefits offered to employees?</summary><div class="faq-answer"><p>Start with the current Employee Benefits Guide for your position/classification. It explains the benefit programs available for the current plan year.</p><p>The updated Employee Benefits Guide will be added here when available.</p><p>For a question about personal eligibility, enrollment, deductions, or existing coverage, <a href="https://gaf-boj.com/support/">submit a Benefits Support Ticket</a>.</p></div></details>
+</section>
+
+  <aside class="contact-panel" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Need us to take a look?</h2><p>Need to send supporting screenshots or forms? Email them to <a href="mailto:help@gaf-boj.com">help@gaf-boj.com</a>. Include your name, restaurant location, and what the attachment relates to so we can match it to your ticket.</p>
+    <p>Use a Support Ticket for pay, account access, benefits, and workplace concerns. The form asks questions based on what you need help with.</p>
+
+    <a class="text-link" href="/support/" style="color:#ffffff;">
+      <strong style="font-size:1.1rem;white-space:normal;">
+        Submit a Support Ticket ↗
+      </strong>
+    </a>
+
+    <p class="hours">People &amp; Culture is available <strong>Monday–Friday, 9 AM–4 PM Eastern</strong>. We strive to respond within <strong>12–24 business hours</strong>.</p>
+
+    <p style="font-size:.85rem;">
+      Having trouble using the form?
+      Text <a href="sms:+18004841622">800-484-1622</a>
+      or email <a href="mailto:help@gaf-boj.com">help@gaf-boj.com</a>.
+    </p>
+
+    <p style="font-size:.85rem;">
+      Support Tickets are not monitored for emergency response.
+      For an injury at work, notify your GM or another available
+      store manager right away.
+    </p>
+  </aside>
+</main>
+  <footer class="site-footer">
+    <div class="wrap footer-inner"><strong>Georgia Foods | A&amp;D of Greensborough</strong><button type="button" data-lock-device>Lock this device</button></div>
+  </footer>
+  </div>
+  <script>
+
+(() => {
+  "use strict";
+  // Shared portal passcode hash. Update this array on BOTH HTML pages.
+  // Passcodes are case-sensitive; surrounding whitespace is ignored.
+  const VALID_HASHES = [
+    "955e49a21b4414aee3654247bb4e726317ecd8b37434e04504c21490148d807f"
+  ];
+  const allowed = new Set(VALID_HASHES.filter(value => /^[a-f0-9]{64}$/i.test(value)).map(value => value.toLowerCase()));
+  const STORAGE_KEY = "gaf_bonnection_store_hash_v1";
+  const REAL_TITLE = document.body.dataset.portalTitle;
+  const screen = document.getElementById("login-screen");
+  const app = document.getElementById("app-content");
+  const form = document.getElementById("passcode-form");
+  const input = document.getElementById("store-passcode");
+  const status = document.getElementById("login-status");
+  const button = document.getElementById("unlock-button");
+  let busy = false;
+  let sessionHash = null;
+  function readSaved() { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } }
+  function clearSaved() { try { localStorage.removeItem(STORAGE_KEY); } catch {} }
+  function unlock(hash) {
+    sessionHash = hash;
+    screen.hidden = true;
+    app.style.display = "block";
+    app.removeAttribute("aria-hidden");
+    document.title = REAL_TITLE;
+    input.value = "";
+    const heading = app.querySelector("h1");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
+  }
+  function lock() {
+    sessionHash = null;
+    clearSaved();
+    app.style.display = "none";
+    app.setAttribute("aria-hidden", "true");
+    screen.hidden = false;
+    document.title = "Employee Portal";
+    input.value = "";
+    status.textContent = "";
+    input.focus({ preventScroll: true });
+  }
+  const saved = readSaved();
+  if (saved && allowed.has(saved)) unlock(saved);
+  else if (saved) clearSaved();
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (busy) return;
+    status.textContent = "";
+    const passcode = input.value.trim();
+    if (!passcode) { status.textContent = "Enter your store passcode."; input.focus(); return; }
+    if (!allowed.size) { status.textContent = "Store passcodes have not been set up yet. Please check with your manager."; return; }
+    if (!globalThis.crypto?.subtle || !globalThis.TextEncoder) {
+      status.textContent = "Open this portal over HTTPS in an up-to-date browser, then try again.";
+      return;
+    }
+    busy = true; button.disabled = true; button.textContent = "Checking…";
+    try {
+      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passcode));
+      const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+      if (!allowed.has(hash)) {
+        status.textContent = "That passcode wasn’t recognized. Try again or ask your General Manager.";
+        input.value = ""; input.focus();
+        return;
+      }
+      try { localStorage.setItem(STORAGE_KEY, hash); } catch { /* Access still works if storage is unavailable. */ }
+      unlock(hash);
+    } catch {
+      status.textContent = "We couldn’t check that passcode. Please try again.";
+    } finally {
+      busy = false; button.disabled = false; button.textContent = "Open portal";
+    }
+  });
+  document.querySelectorAll("[data-lock-device]").forEach(control => control.addEventListener("click", lock));
+  window.addEventListener("storage", event => {
+    if (event.key === STORAGE_KEY || event.key === null) {
+      const hash = readSaved();
+      if (hash && allowed.has(hash)) unlock(hash);
+      else if (sessionHash) lock();
+    }
+  });
+})();
+  </script>
+</body>
+</html>
