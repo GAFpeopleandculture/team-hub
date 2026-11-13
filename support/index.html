@@ -277,10 +277,26 @@
   if(!current)return;
   let allow=true, note='If the information above didn’t resolve your issue, continue with a request below.';
   switch(current.gate){
-   case 'selfhelp':allow=false;note='Please follow the steps above. For sign-in problems, choose Worker Hub access help.';break;
+   case 'selfhelp':
+  allow = true;
+  note = 'Follow the steps above. If you still need help, describe where you’re getting stuck below.';
+  break;
    case 'access':if(!get('accessProblem')){allow=false;note='Choose what happens when you try to sign in.';}else if(get('accessProblem')==='I’m only seeing applications'){allow=false;note='Please ask your GM to send your Worker Hub invitation. No support ticket is needed for that step.';}break;
    case 'gm':if(get('gmSpoken')!=='Yes'){allow=false;note='Please speak with your GM to verify your time records first.';}else note='You may submit a ticket. If punches or hours need correction, People & Culture still needs the completed PPA from your GM.';break;
-   case 'deposit':allow=['bankContact','returnNotice','updatedAccount','fiveDays'].every(k=>get(k)==='Yes') && get('method')==='Direct deposit';note=get('method')==='Manual Payment'?'Please choose the Manual Payment option for the correct steps.':allow?'You can submit a ticket with the pay date and details.':'Please complete the checks above first. After the return notice, valid account update, and five business days, you can submit a ticket.';break;
+  case 'deposit':
+  if (get('method') === 'Manual Payment') {
+    topicSelect.value = 'manual';
+    render();
+    $('troubleshooting').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+    return;
+  }
+
+  allow = true;
+  note = 'Review the steps above. If you still need help, tell us what happened below.';
+  break;
    case 'pto':allow=get('onTime')==='Yes';note=allow?'Include the approval date and pay date in your request.':'Please check the approval date. For requests approved after the deadline, speak with your GM about an adjustment.';break;
    case 'vacation':allow=get('oneYear')!=='No';if(!get('oneYear'))allow=false;note=get('oneYear')==='No'?'Vacation is not available until one year of continuous service.':allow?'If your eligibility or balance needs review, continue below.':'Please check whether you’ve completed one year of continuous service.';break;
    case 'insurance':allow=get('enrolled')!=='Yes' && !!get('enrolled');note=get('enrolled')==='Yes'?'Please request your card from your provider, or call Southeast Insurance Group if you’re unsure who your provider is.':'For enrollment questions, you can continue with a benefits request.';break;
