@@ -286,7 +286,7 @@
    case 'insurance':allow=get('enrolled')!=='Yes' && !!get('enrolled');note=get('enrolled')==='Yes'?'Please request your card from your provider, or call Southeast Insurance Group if you’re unsure who your provider is.':'For enrollment questions, you can continue with a benefits request.';break;
    case 'altametrics':allow=!!get('role')&&get('role')!=='Team Member'&&!!get('triedSteps')&&get('triedSteps')!=='No';note=get('role')==='Team Member'?'Altametrics Admin access is limited to Shift Leaders, AGMs, and GMs.':allow?'Please describe what happens when you try to sign in.':'Please follow the steps for your role first. GMs without an assigned email may continue after choosing that option.';break;
   }
-  $('next-step').textContent=note;form.hidden=!allow;$('review-panel').hidden=true;
+  $('next-step').textContent=note;form.hidden=!false;$('review-panel').hidden=true;
  }
  topicSelect.addEventListener('change',render);
  $('anonymous').addEventListener('change',()=>{$('identity-fields').hidden=$('anonymous').checked;if($('anonymous').checked){['firstName','lastName','email','phone'].forEach(id=>$(id).value='');}});
