@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#a4262c">
-  <title>Employee Portal</title>
+  <title>Georgia Foods Bo-nnection | Georgia Foods</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@
     .wrap { width:min(100% - 2.5rem,70rem); margin-inline:auto; }
     a { color:inherit; }
     :focus-visible { outline:3px solid #215aa5; outline-offset:4px; }
-    #app-content h1[tabindex="-1"]:focus { outline:none; }
     .skip { position:absolute; z-index:5; top:.5rem; left:.5rem; padding:.55rem .8rem; background:white; transform:translateY(-200%); }
     .skip:focus { transform:none; }
     .icon-bank { position:absolute; width:0; height:0; overflow:hidden; }
@@ -85,21 +84,6 @@
     .call-link { color:var(--muted); font-size:.8rem; }
     @media(max-width:48rem) { .manager { align-items:flex-start; flex-direction:column; } .people-layout { grid-template-columns:1fr; } .contact-panel { max-width:36rem; } }
     @media(max-width:36rem) { .wrap { width:min(100% - 2rem,70rem); } .brandbar { gap:.8rem; padding-block:1.5rem; } .hero-art { width:3.8rem; } .company-name { font-size:.7rem; letter-spacing:0; } h1 { font-size:clamp(1.9rem,7.8vw,2.6rem); } .workspace,.tools-grid { grid-template-columns:1fr; } .manager { padding:1.1rem; } .manager-title { font-size:1.15rem; } .tool { min-height:8rem; padding:1rem; } .tools-grid .people-card { min-height:8rem; } }
-    /* Content is hidden in HTML before any JavaScript can run. */
-    #login-screen { min-height: 100vh; min-height: 100svh; padding: 1.5rem; display: grid; place-items: center; background: #f5f4f1; }
-    #login-screen[hidden] { display: none; }
-    #login-screen .login-card { width: min(100%, 26rem); padding: clamp(1.4rem, 5vw, 2.3rem); background: #fff; border: 1px solid #dedbd5; border-radius: .85rem; box-shadow: 0 .35rem 1.5rem #00000008; }
-    #login-screen h1 { font: 700 1.8rem/1.2 var(--body); letter-spacing: -.02em; color: #252525; margin: 0 0 .65rem; }
-    #login-screen p { color: #5c5c5c; font-size: .95rem; line-height: 1.6; margin: 0 0 1.3rem; }
-    #login-screen label { display: block; font-size: .9rem; font-weight: 700; color: #333; margin-bottom: .5rem; }
-    #store-passcode { width: 100%; min-height: 3rem; padding: .7rem .8rem; font: 1rem var(--body); border: 1px solid #aaa; border-radius: .4rem; background: white; color: #222; }
-    #unlock-button { width: 100%; min-height: 3rem; margin-top: .9rem; padding: .75rem; font: 700 1rem var(--body); color: white; background: #a4262c; border: 0; border-radius: .4rem; cursor: pointer; }
-    #unlock-button:disabled { opacity: .7; cursor: wait; }
-    #login-screen #login-status { color: #8a1820; min-height: 1.5em; margin: .8rem 0 0; font-size: .9rem; }
-    #login-screen .login-help { font-size: .8rem; margin: 1rem 0 0; color: #656565; }
-    #login-screen noscript p { color: #8a1820; margin-top: 1rem; }
-    [data-lock-device] { background: none; border: 1px solid #ffffff70; border-radius: .3rem; padding: .4rem .65rem; color: white; font: inherit; cursor: pointer; }
-
     html { scroll-padding-top:calc(var(--hub-header-height, 0px) + .65rem); }
     @media (prefers-reduced-motion:no-preference) {
       html { scroll-behavior:smooth; }
@@ -191,23 +175,9 @@
   </style>
 <base target="_blank">
 </head>
-<body data-portal-title="Georgia Foods Bo-nnection | Georgia Foods">
+<body>
 
-  <div id="login-screen">
-    <section class="login-card" aria-labelledby="login-heading">
-      <h1 id="login-heading">Restaurant Portal</h1>
-      <p>Enter your store passcode to continue.</p>
-      <form id="passcode-form">
-        <label for="store-passcode">Store passcode</label>
-        <input id="store-passcode" name="passcode" type="password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" required aria-describedby="login-status login-help">
-        <button id="unlock-button" type="submit">Open portal</button>
-        <p id="login-status" role="status" aria-live="polite"></p>
-      </form>
-      <p class="login-help" id="login-help">Ask your General Manager if you need your store’s passcode. This browser will remember your access unless its saved data is cleared or the passcode is retired.</p>
-      <noscript><p>JavaScript is required to open this portal. Enable it in your browser, then reload this page.</p></noscript>
-    </section>
-  </div>
-  <div id="app-content" style="display: none;" aria-hidden="true">
+  <div id="app-content">
   <svg class="icon-bank" aria-hidden="true" focusable="false">
     <symbol id="icon-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2"/></symbol>
     <symbol id="icon-work" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="13" rx="2"/><path d="M8 6V4h8v2M4 11h16m-9 3h2"/></symbol>
@@ -402,94 +372,10 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap footer-inner"><strong>Georgia Foods | A&amp;D of Greensborough</strong><button type="button" data-lock-device>Lock this device</button></div>
+    <div class="wrap footer-inner"><strong>Georgia Foods | A&amp;D of Greensborough</strong></div>
   </footer>
 
   </div>
-  <script>
-
-(() => {
-  "use strict";
-  // Shared portal passcode hash. Update this array on BOTH HTML pages.
-  // Passcodes are case-sensitive; surrounding whitespace is ignored.
-  const VALID_HASHES = [
-    "955e49a21b4414aee3654247bb4e726317ecd8b37434e04504c21490148d807f"
-  ];
-  const allowed = new Set(VALID_HASHES.filter(value => /^[a-f0-9]{64}$/i.test(value)).map(value => value.toLowerCase()));
-  const STORAGE_KEY = "gaf_bonnection_store_hash_v1";
-  const REAL_TITLE = document.body.dataset.portalTitle;
-  const screen = document.getElementById("login-screen");
-  const app = document.getElementById("app-content");
-  const form = document.getElementById("passcode-form");
-  const input = document.getElementById("store-passcode");
-  const status = document.getElementById("login-status");
-  const button = document.getElementById("unlock-button");
-  let busy = false;
-  let sessionHash = null;
-  function readSaved() { try { return localStorage.getItem(STORAGE_KEY); } catch { return null; } }
-  function clearSaved() { try { localStorage.removeItem(STORAGE_KEY); } catch {} }
-  function unlock(hash) {
-    sessionHash = hash;
-    screen.hidden = true;
-    app.style.display = "block";
-    app.removeAttribute("aria-hidden");
-    document.title = REAL_TITLE;
-    input.value = "";
-    const heading = app.querySelector("h1");
-    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
-  }
-  function lock() {
-    sessionHash = null;
-    clearSaved();
-    app.style.display = "none";
-    app.setAttribute("aria-hidden", "true");
-    screen.hidden = false;
-    document.title = "Employee Portal";
-    input.value = "";
-    status.textContent = "";
-    input.focus({ preventScroll: true });
-  }
-  const saved = readSaved();
-  if (saved && allowed.has(saved)) unlock(saved);
-  else if (saved) clearSaved();
-  form.addEventListener("submit", async event => {
-    event.preventDefault();
-    if (busy) return;
-    status.textContent = "";
-    const passcode = input.value.trim();
-    if (!passcode) { status.textContent = "Enter your store passcode."; input.focus(); return; }
-    if (!allowed.size) { status.textContent = "Store passcodes have not been set up yet. Please check with your manager."; return; }
-    if (!globalThis.crypto?.subtle || !globalThis.TextEncoder) {
-      status.textContent = "Open this portal over HTTPS in an up-to-date browser, then try again.";
-      return;
-    }
-    busy = true; button.disabled = true; button.textContent = "Checking…";
-    try {
-      const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passcode));
-      const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
-      if (!allowed.has(hash)) {
-        status.textContent = "That passcode wasn’t recognized. Try again or ask your General Manager.";
-        input.value = ""; input.focus();
-        return;
-      }
-      try { localStorage.setItem(STORAGE_KEY, hash); } catch { /* Access still works if storage is unavailable. */ }
-      unlock(hash);
-    } catch {
-      status.textContent = "We couldn’t check that passcode. Please try again.";
-    } finally {
-      busy = false; button.disabled = false; button.textContent = "Open portal";
-    }
-  });
-  document.querySelectorAll("[data-lock-device]").forEach(control => control.addEventListener("click", lock));
-  window.addEventListener("storage", event => {
-    if (event.key === STORAGE_KEY || event.key === null) {
-      const hash = readSaved();
-      if (hash && allowed.has(hash)) unlock(hash);
-      else if (sessionHash) lock();
-    }
-  });
-})();
-  </script>
   <script>
     (() => {
       const header = document.querySelector(".hub-header");
